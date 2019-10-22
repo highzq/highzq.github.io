@@ -1,0 +1,279 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0;" name="viewport" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="favicon.ico">
+    <link rel="stylesheet" href="css/animate.css">
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+
+    <title></title>
+    <!-- 四季银河·心飨臻味 -->
+    <style>
+        *{
+            padding: 0;
+            margin: 0;
+        }
+        .flex {
+            display: -webkit-box;
+            display: -webkit-flex;
+            display: -ms-flexbox;
+            display: flex;
+        }
+        
+        .flex-v {
+            -webkit-box-orient: vertical;
+            -webkit-flex-direction: column;
+            -ms-flex-direction: column;
+            flex-direction: column;
+        }
+        
+        .flex-row-reverse{
+            flex-direction: row-reverse;
+        }
+        
+        .flex-1 {
+            -webkit-box-flex: 1;
+            -webkit-flex: 1;
+            -ms-flex: 1;
+            flex: 1;
+        }
+        
+        .flex-align-center {
+            -webkit-box-align: center;
+            -webkit-align-items: center;
+            -ms-flex-align: center;
+            align-items: center;
+        }
+        
+        .flex-pack-center {
+            -webkit-box-pack: center;
+            -webkit-justify-content: center;
+            -ms-flex-pack: center;
+            justify-content: center;
+        }
+
+        .flex-justify-end {
+            -webkit-box-pack: end;
+            -webkit-justify-content: flex-end;
+            -ms-flex-pack: end;
+            justify-content: flex-end;
+        }  
+
+        /*兼容不支持 sapce-around 属性*/
+        .flex-justify-between{
+            -webkit-box-pack: justify;
+            -webkit-justify-content: space-between;
+            -ms-flex-pack: justify;
+            justify-content: space-between;
+        }
+        
+        
+        .flex-self-center{
+            -webkit-box-align: center;
+            -ms-flex-align: center;
+            align-self: center;
+        }
+        
+        .flex-wrap{
+            flex-wrap:wrap;
+        }
+
+        html,body{
+            width: 100%;
+            height: 100%;
+        }
+        
+        body{
+            background-color: #000;
+            
+        }
+
+        .bg-img{
+            background: url("images/xingkong.jpg");
+            background-size: cover;
+        }
+
+        .one-step{
+            width: 100%;
+            height: 100%;            
+            background-color: #000;
+        }
+
+        .one-step .progress-bar{
+            width: 200px;
+            height: 4px;
+            margin-top: 40px;
+            margin-bottom: 60px;
+        }
+        .one-step .progress{
+            height: 4px;
+            background-color: #fff;
+            animation: progress 3.5s ease-in;
+        }
+
+        .two-step{
+            width: 100%;
+            height: 100%;            
+            background-color: #000;
+            display: none;
+        }
+
+        .two-step h2{
+            color: #fff;
+            margin: 10px 0 20px;
+        }
+        
+        .two-step p{
+            color: #fff;
+            font-size: 16px;
+            margin-bottom: 30px;
+        }
+
+        .two-step .reading{
+            color: #fff;
+            font-size: 12px;
+            opacity: 0;
+        }
+
+        .video{
+            display: none;
+        }
+
+        .four_step{
+            width: 100%;
+            height: 100%;       
+            display: none;     
+        }
+
+    </style>
+</head>
+<body>
+    <div id="root">       
+        <!-- 步骤一 -->
+        <div id="oneStep" class="one-step flex flex-v flex-pack-center flex-align-center">
+            <img src="images/pageLogo.png" width="277" height="176" alt="">
+            <div class="progress-bar">   
+                <div class="progress"></div>
+            </div>
+        </div>
+        <!-- 步骤二 -->
+        <div id="twoStep" class="two-step flex flex-v flex-pack-center flex-align-center">
+            <img src="images/Taste_chinese_white.png" width="100" height="93" alt="">
+            <h2>四季银河 心飨臻味</h2>
+            <p>邀请函</p>
+            <p id="reading" class="reading">点击敬阅邀请函</p>
+        </div>
+        <!-- 步骤三 -->
+        <video 
+            id="video" 
+            class="video" 
+            src="https://www.w3school.com.cn/i/movie.ogg"  
+            width="100%" 
+            height="100%" 
+            preload="preload"
+            x5-video-player-fullscreen="true"
+            x5-video-orientation="landscape"
+        >
+        </video>
+        <!-- 步骤四 -->
+        <div id="fourStep" class="four_step">
+            <img src="images/fengdizhi.png" width="100%" height="100%" alt="">
+        </div>
+    </div>
+    <script>
+        $(function(){
+            /**
+             * 横竖屏
+             * @param {Object}
+             */   
+            var wrapper = document.getElementById("root");      
+            var mark = window.orientation == 90 || window.orientation == -90;    //初始角度
+            //不同角度宽高需要互换
+            var width = document.documentElement[mark ? 'clientHeight' : 'clientWidth']; 
+            var height = document.documentElement[mark ? 'clientWidth' : 'clientHeight'];                         
+            var detectOrient = function() {
+                var style = "";                            
+                if (window.orientation == 90 || window.orientation == -90) { //横屏                             
+                    style += "width:100%;"; 
+                    style += "height:100%;";
+                    style += "-webkit-transform: rotate(0); transform: rotate(0);";
+                    style += "-webkit-transform-origin: 0 0;";
+                    style += "transform-origin: 0 0;";
+                } else if(window.orientation == 180 || window.orientation == 0){ //竖屏                    
+                    style += "width:" + height + "px;";// 注意旋转后的宽高切换
+                    style += "height:"+  width + "px;";
+                    style += "-webkit-transform: rotate(90deg); transform: rotate(90deg);";
+                    // 注意旋转中点的处理
+                    style += "-webkit-transform-origin: " + width / 2 + "px " + width / 2 + "px;";
+                    style += "transform-origin: " + width / 2 + "px " + width / 2 + "px;";
+                }
+                wrapper.style.cssText = style;
+            }        
+            window.addEventListener("load", detectOrient, false);
+            window.addEventListener("onorientationchange" in window ? "orientationchange" : "resize", detectOrient, false);
+            detectOrient();            
+        })
+
+    </script>    
+    <script>
+        $(function(){
+            //首页动画
+            function firstPage(){
+                $("#oneStep").fadeOut("slow").siblings().hide();
+                $("#twoStep").fadeIn(1500,function(){
+                    $("#reading").animate({
+                        opacity: 1
+                    },600);
+                }).css({"display":"flex"});    
+            }
+            //进入时动画效果
+            setTimeout(function(){
+                firstPage();
+            },3500);
+            //点击开始播放视频
+            $("#twoStep").click(function(){
+                $(this).fadeOut("slow");
+                $("#root").addClass("bg-img");
+                setTimeout(function(){                
+                    $("#video").show(function(){
+                        if (this.paused)this.play();
+                        this.onended = function(){
+                            console.log(111)
+                            $(this).hide(function(){
+                                $("#fourStep").show();
+                            });
+                        }
+                        // document.addEventListener("WeixinJSBridgeReady", function (){ 
+                        //     this.play();
+                        // }, false)
+                        // if (this.webkitSupportsFullscreen) {
+                        //     this.webkitEnterFullscreen();
+                        // } else {
+                        //     this.webkitRequestFullScreen();
+                        // }
+                    });
+                },600);
+            });
+            //结束封面点击回到首页
+            $("#fourStep").click(function(){
+                firstPage();
+            });
+            //陀螺仪效果
+            window.addEventListener('deviceorientation', function (event) {
+                var alpha = event.alpha,
+                beta = event.beta,
+                gamma = event.gamma;
+                $("#root").css("background-position",beta+"px "+gamma+"px");
+    
+            }, false);
+            if (!window.DeviceOrientationEvent) {
+                alert("不支持")
+            }
+        });
+    </script>   
+</body>
+
+</html>
