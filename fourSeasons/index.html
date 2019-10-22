@@ -90,7 +90,14 @@
             background-color: #000;
             
         }
-
+        body:after {
+            content: "";
+            display: block;
+            position: absolute;
+            background: url("images/xingkong.jpg") no-repeat -10000px -1000px,url("images/pageLogo.png") no-repeat -10000px -1000px,url("images/Taste_chinese_white.png") no-repeat -10000px -1000px,url("images/fengdizhi.png") no-repeat -10000px -1000px;
+            width: 0;
+            height: 0
+        }
         .bg-img{
             background: url("images/xingkong.jpg");
             background-size: cover;
