@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+        <button onclick="playPause()">播放/暂停</button> 
+    <video id="video" style="display: block;" preload="auto" x-webkit-airplay="true" airplay="allow" webkit-playsinline="true" playsinline="true" >
+        <source src="http://pvp.qq.com/act/a20161026nw/movies/movie.mp4" type="video/mp4">
+    </video>
+    <video id="video1" width="420">
+        <source src="http://pvp.qq.com/act/a20161026nw/movies/movie.mp4" type="video/mp4">
+        <source src="mov_bbb.ogg" type="video/ogg">
+        您的浏览器不支持 HTML5 video 标签。
+    </video>    
+
+    <script>
+        var myVideo = document.getElementById("video");
+        function playPause()
+        { 
+            if (myVideo.paused) 
+            myVideo.play(); 
+            else 
+            myVideo.pause(); 
+        } 
+
+    </script>
+</body>
+</html>

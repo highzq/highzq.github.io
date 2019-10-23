@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=320,initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
+    <meta name="apple-mobile-web-app-capable" content="yes"/>
+    <meta name="apple-mobile-web-app-status-bar-style" content="black"/>
+    <meta name="Copyright" content="Copyright (c) 2006-2016 TENCENT"/>
+    <title>mmd_videoPlayerAndPlug_h</title>
+    <style>
+        html, body {
+            margin: 0;
+            padding: 0;
+            /*text-align: center;*/
+            /*background-color: #cccccc;*/1
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+
+        }
+
+        /*假如添加了video标签,可能会出现video标签默认置顶的情况,解决这个bug可以通过样式设置来规避;*/
+        .compatibleStyle {
+            backface-visibility:hidden;
+            -webkit-backface-visibility:hidden;	/* Chrome 和 Safari */
+            -moz-backface-visibility:hidden; 	/* Firefox */
+            -ms-backface-visibility:hidden; 	/* Internet Explorer */
+            -webkit-perspective: 0;
+            -webkit-transform: translate3d(0,0,0);
+            visibility:visible;
+        }
+
+    </style>
+</head>
+<body>
+<script src="http://ossweb-img.qq.com/images/js/mmdPlugin/mmd-plugin.min.1.0.2.js"></script>
+<script src="http://ossweb-img.qq.com/images/js/mmdVideoPlayer/mmd.videoplayer.min.1.0.1.js"></script>
+
+<!--
+参数简易说明:
+1.view-mode = "v" "v"竖屏,"h"横屏;
+2.view-rotation="auto" 默认"auto" 自动旋转,"v"竖屏可视,"h"横屏可视;
+3.view-scale="exactfit" 缩放模式 默认"exactfit";
+                    "exactfit":高宽等于屏幕高宽;
+                    "noborder":裁剪铺满;
+                    "noscale":不缩放;
+                    "showall":显示全部;
+                    "width":宽度等于屏幕宽;
+                    "height":高度等于屏幕高;
+4.view-align="",默认为"" 居中;
+                    "t":靠顶;
+                    "l":靠左;
+                    "r":靠右;
+                    "b":靠底;
+                    可以结合一起用，比如"tl","tr","bl","br";
+5.view-width="400" 目标宽 默认"400";
+6.view-height="400" 目标高 默认"400";
+-->
+
+<div view-mode="h" view-rotation="auto" view-scale="noborder" view-width="1136" view-height="640" view-align="">
+    <div style="position: absolute;">
+        <video id="video" style="display:none;"></video>
+    </div>
+    <div id="loading" class="compatibleStyle"  style="position: absolute;">
+        <img  src="http://game.gtimg.cn/images/tgideas/act/a20170330mmdVideoPlayer/videoPlayerDemo/mmd_videoPlayerAndPlug_h_loading.jpg"/>
+    </div>
+    <div id="end" class="compatibleStyle"  style="position: absolute;display: none;">
+        <img  src="http://game.gtimg.cn/images/tgideas/act/a20170330mmdVideoPlayer/videoPlayerDemo/mmd_videoPlayerAndPlug_h_end.jpg"/>
+    </div>
+    <button id="startPlay" class="compatibleStyle" style="position: absolute;width: 130px;height: 60px;background-color: #ffffff;display:none;bottom: 30%;left: 602px">播放</button>
+    <button id="toEnd" class="compatibleStyle" style="position: absolute;width: 130px;height: 60px;background-color: #ffffff;display:none;bottom: 10%;right: 15%" onclick="isLoop=false;document.getElementById('toEnd').style.display='none';">正在循环视频,点我可跳过循环</button>
+</div>
+
+<script>
+    var src='http://pvp.qq.com/act/a20161026nw/movies/movie.mp4';
+    var isLoop=true;//视频循环点,用来卡住是否循环;
+    var videoPlayer=new MMD.VideoPlayer(
+        {
+            videoElement:document.getElementById('video'),//[必填],video元素;
+            src:src,//[必填],video src;
+            loop:false,//[可选],是否循环,默认false,true为循环;
+            muted:false,//[可选],是否静音,默认false;
+            poster:'',//[可选],video默认图片;
+            timesParam:[
+                {name:'firstPoint',time:11.48}
+                ],//[可选],video currenttime时间点;
+            onTimes:function(name){
+                console.log(name)
+                switch (name)
+                {
+                    case 'firstPoint':
+                        //to do;
+                        if(isLoop)
+                        {
+                            videoPlayer.currentTimeAndPlay=6.44;
+                            document.getElementById('toEnd').style.display='block';
+                        }
+                        else
+                        {
+
+                        }
+
+                        break;
+                }
+            },//[可选],video currenttime回调;
+            onStart:function(){
+                document.getElementById('loading').style.display='none';
+                console.log('video start');
+            },//[可选],video第一个画面出现回调;
+            onEnd:function(){
+                document.getElementById('end').style.display='block';
+                console.log('video end');
+            }//[可选],video播放完成回调;
+        }
+    );
+
+//    console.log('videoPlayer.isVideoCanAutoPlay:',videoPlayer.isVideoCanAutoPlay);
+    var btn=document.getElementById('startPlay');
+    if(videoPlayer.isVideoCanAutoPlay)
+    {
+        videoPlayer.play();
+    }
+    else
+    {
+        btn.style.display='block';
+        btn.addEventListener('click',function(e)
+        {
+            btn.style.display='none';
+            videoPlayer.play();
+        });
+    }
+
+</script>
+
+</body>
+</html>

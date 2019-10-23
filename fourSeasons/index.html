@@ -8,7 +8,6 @@
     <link rel="stylesheet" href="favicon.ico">
     <link rel="stylesheet" href="css/animate.css">
     <link href="css/video-js.css" rel="stylesheet">
-    <!-- <link rel="preload" href="//vjs.zencdn.net/v/oceans.mp4" as="video" type="video/mp4"> -->
     <script src="js/jquery-3.4.1.min.js"></script>
        
     <title></title>
@@ -127,13 +126,12 @@
             margin-top: 40px;
             margin-bottom: 60px;
             position: relative;
-            border-radius: 5px;           
+            border-radius: 15px;           
             overflow: hidden;
         }
         .one-step .progress{
             height: 3px;
-            background-color: #fff; 
-            
+            background-color: #fff;             
             position: absolute;
             top: 0;
             left: 0;
@@ -201,7 +199,15 @@
             top: 0;
             z-index: 999;
         }
-
+        .compatibleStyle {
+            backface-visibility:hidden;
+            -webkit-backface-visibility:hidden; /* Chrome 和 Safari */
+            -moz-backface-visibility:hidden;  /* Firefox */
+            -ms-backface-visibility:hidden;  /* Internet Explorer */
+            -webkit-perspective: 0;
+            -webkit-transform: translate3d(0,0,0);
+            visibility:visible;  
+        } 
     </style>
 </head>
 <body>
@@ -226,23 +232,27 @@
             id="video" 
             class="video video-js"                       
             data-setup='{"controls": true }'
+            x5-video-player-type="h5"
+            x-webkit-airplay="true" 
+            airplay="allow" 
+            webkit-playsinline="true" 
+            playsinline="true"
+            
         >
             <source src="https://www.w3school.com.cn/i/movie.mp4" type="video/mp4">
         </video>
-        <!-- 
-            "preload": "auto"
-            {"preload": "preload"}
-            width="100%" 
-            height="100%"             
-            x5-video-player-fullscreen="true"
-            x5-video-orientation="landscape"
-         -->
+        <!-- <div view-mode="h" view-rotation="auto" view-scale="noborder" view-width="1334" view-height="750" view-align="">
+            <div style="position: absolute;">
+                <video id="video" style="display:none;"></video>
+            </div>
+        </div> -->
         <!-- 步骤四 -->
         <div id="fourStep" class="four_step">            
             <img src="images/fengdizhi.png" width="100%" height="100%" alt="">
         </div>
     </div>
     <script src='js/video.js'></script>
+
     <script>
         $(function(){
             /**
@@ -298,7 +308,7 @@
             $("#twoStep").click(function(){
                 $(this).fadeOut("slow");
                 $("#root").addClass("bg-img");
-                setTimeout(function(){        
+                setTimeout(function(){               
                     //视频播放        
                     $("#video").show(function(){
                         var player = videojs(
@@ -309,9 +319,11 @@
                                 height:300, 
 	                            width:500,
                             }, 
-                            function () {    
-                                //开始播放                            
-                                this.play();
+                            function () {  
+                                //重新加载视频
+                                this.load();     
+                                //开始播放                                                         
+                                //this.play()
                                 //播放结束
                                 this.on("ended", function() {                                    
                                     // alert("播放结束了");
@@ -322,20 +334,7 @@
                             }
                         )
 
-                        // this.onended = function(){
-                        //     console.log(111)
-                        //     $(this).hide(function(){
-                        //         $("#fourStep").show();
-                        //     });
-                        // }
-                        // document.addEventListener("WeixinJSBridgeReady", function (){ 
-                        //     this.play();
-                        // }, false)
-                        // if (this.webkitSupportsFullscreen) {
-                        //     this.webkitEnterFullscreen();
-                        // } else {
-                        //     this.webkitRequestFullScreen();
-                        // }
+                  
                     });
                 },600);
             });
@@ -349,7 +348,6 @@
                 beta = event.beta,
                 gamma = event.gamma;
                 $("#root").css("background-position",beta+"px "+gamma+"px");
-    
             }, false);
             if (!window.DeviceOrientationEvent) {
                 alert("不支持")
