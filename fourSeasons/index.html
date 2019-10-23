@@ -232,7 +232,8 @@
             id="video" 
             class="video video-js" 
             x5-video-player-type="h5" 
-            data-setup='{"controls": true }'                                
+            playsinline="true"                                
+            data-setup='{"controls": true }'
         >
             <source src="https://www.w3school.com.cn/i/movie.mp4" type="video/mp4">
         </video>
@@ -338,25 +339,6 @@
                 //     //视频播放
                 //     var video = document.getElementById("video");        
                 //     $("#video").show(function(){
-
-
-                //         // player.play().then(()=>{
-                //         //     alert('可以自动播放');
-                //         //     player.play();
-                //         // }).catch((err)=>{
-                //         //     console.log(err);
-                //         //     alert("不允许自动播放");
-
-                //         //     //视频元素可以选择静音后再播放,提示用户打开声音
-                //         //     video.muted=true;
-                //         //     player.play();
-
-                //         //     //也可以在用户交互后调用.play()
-                //         //     // ...
-                //         // });                                       
-                //     });
-                //     video.src = "https://www.w3school.com.cn/i/movie.mp4";
-                //     video.play();
                 // },600);
             });
             //结束封面点击回到首页
@@ -370,9 +352,6 @@
                 gamma = event.gamma;
                 $("#root").css("background-position",beta+"px "+gamma+"px");
             }, false);
-            if (!window.DeviceOrientationEvent) {
-                alert("不支持")
-            }
         });
     </script>   
 </body>
