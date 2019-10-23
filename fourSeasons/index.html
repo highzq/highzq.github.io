@@ -230,18 +230,20 @@
         <!-- 步骤三 -->
         <video 
             id="video" 
-            class="video video-js"                       
-            data-setup='{"controls": true }'
-            x5-video-player-type="h5"
-            x-webkit-airplay="true" 
-            airplay="allow" 
-            webkit-playsinline="true" 
-            playsinline="true"
-            
+            class="video video-js" 
+            x5-video-player-type="h5" 
+            data-setup='{"controls": true }'                                
         >
             <source src="https://www.w3school.com.cn/i/movie.mp4" type="video/mp4">
         </video>
-        <!-- <div view-mode="h" view-rotation="auto" view-scale="noborder" view-width="1334" view-height="750" view-align="">
+        <!-- 
+                        
+            x-webkit-airplay="true" 
+            airplay="allow" 
+            webkit-playsinline="true" 
+            playsinline="true"            
+            x5-video-player-type="h5"
+            <div view-mode="h" view-rotation="auto" view-scale="noborder" view-width="1334" view-height="750" view-align="">
             <div style="position: absolute;">
                 <video id="video" style="display:none;"></video>
             </div>
@@ -291,6 +293,28 @@
     </script> 
     <script>
         $(function(){
+            //初始化视频
+            var player = videojs(
+                'video', 
+                {                                       
+                    autoplay: "muted",              
+                    preload: "auto",
+                    fluid: true,            
+                }, 
+                function () {  
+                    //重新加载视频
+                    this.load();     
+                    //开始播放                                                         
+                    //this.play()
+                    //播放结束
+                    this.on("ended", function() {                                    
+                        // alert("播放结束了");
+                        $("#video").hide(function(){
+                            $("#fourStep").fadeIn();
+                        });                                    
+                    });                                
+                }
+            )            
             //首页动画
             function firstPage(){
                 $("#oneStep").fadeOut("slow").siblings().hide();
@@ -308,35 +332,32 @@
             $("#twoStep").click(function(){
                 $(this).fadeOut("slow");
                 $("#root").addClass("bg-img");
-                setTimeout(function(){               
-                    //视频播放        
-                    $("#video").show(function(){
-                        var player = videojs(
-                            'video', 
-                            {                                 
-                                preload: "auto",
-                                fluid: true,
-                                height:300, 
-	                            width:500,
-                            }, 
-                            function () {  
-                                //重新加载视频
-                                this.load();     
-                                //开始播放                                                         
-                                //this.play()
-                                //播放结束
-                                this.on("ended", function() {                                    
-                                    // alert("播放结束了");
-                                    $("#video").hide(function(){
-                                        $("#fourStep").fadeIn();
-                                    });                                    
-                                });                                
-                            }
-                        )
+                $("#video").show();
+                player.play();
+                // setTimeout(function(){               
+                //     //视频播放
+                //     var video = document.getElementById("video");        
+                //     $("#video").show(function(){
 
-                  
-                    });
-                },600);
+
+                //         // player.play().then(()=>{
+                //         //     alert('可以自动播放');
+                //         //     player.play();
+                //         // }).catch((err)=>{
+                //         //     console.log(err);
+                //         //     alert("不允许自动播放");
+
+                //         //     //视频元素可以选择静音后再播放,提示用户打开声音
+                //         //     video.muted=true;
+                //         //     player.play();
+
+                //         //     //也可以在用户交互后调用.play()
+                //         //     // ...
+                //         // });                                       
+                //     });
+                //     video.src = "https://www.w3school.com.cn/i/movie.mp4";
+                //     video.play();
+                // },600);
             });
             //结束封面点击回到首页
             $("#fourStep").click(function(){
