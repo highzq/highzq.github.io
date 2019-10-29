@@ -378,6 +378,37 @@
     
     
     <article class="index-post">
+        <a class="abstract-title" href = "/2018/07/25/forEach兼容写法/" >
+            
+                <span>forEach兼容写法</span>
+        </a>
+        <div class="abstract-content">
+            最近写代码写到循环的时候没有多想就直接用了forEach，最后测试在IE的环境下测出了不兼容，为了不改动代码就打算定义一个 Array.prototype.forEach。
+最后在网上找到这段(兼容IE8)
+if ( !Array.prototype.forEach ) &#123;    Array.prototype.forEach = function forEach( callback, thisArg ) &#123;        var T, k;        if ( this == null ) &#123;            throw new TypeErro...
+        </div>
+        <div class="abstract-post-meta">
+            <!-- date  -->
+            <div class="abstract-date">
+                <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2018/07/25</span>
+            </div>
+            <!-- tags  -->
+            
+            <div class= abstract-tags >
+    
+        <a class="post-tag" href="javascript:void(0);" data-tags = "javaScript">javaScript</a>
+    
+</div>
+            
+        </div>
+    </article>
+    
+    
+    
+    
+    
+    
+    <article class="index-post">
         <a class="abstract-title" href = "/2018/07/25/让h5页面强制横屏/" >
             
                 <span>让h5页面强制横屏</span>
@@ -400,37 +431,6 @@
         <a class="post-tag" href="javascript:void(0);" data-tags = "javaScript">javaScript</a>
     
         <a class="post-tag" href="javascript:void(0);" data-tags = "技巧">技巧</a>
-    
-</div>
-            
-        </div>
-    </article>
-    
-    
-    
-    
-    
-    
-    <article class="index-post">
-        <a class="abstract-title" href = "/2018/07/25/forEach兼容写法/" >
-            
-                <span>forEach兼容写法</span>
-        </a>
-        <div class="abstract-content">
-            最近写代码写到循环的时候没有多想就直接用了forEach，最后测试在IE的环境下测出了不兼容，为了不改动代码就打算定义一个 Array.prototype.forEach。
-最后在网上找到这段(兼容IE8)
-if ( !Array.prototype.forEach ) &#123;    Array.prototype.forEach = function forEach( callback, thisArg ) &#123;        var T, k;        if ( this == null ) &#123;            throw new TypeErro...
-        </div>
-        <div class="abstract-post-meta">
-            <!-- date  -->
-            <div class="abstract-date">
-                <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2018/07/25</span>
-            </div>
-            <!-- tags  -->
-            
-            <div class= abstract-tags >
-    
-        <a class="post-tag" href="javascript:void(0);" data-tags = "javaScript">javaScript</a>
     
 </div>
             
@@ -561,10 +561,6 @@ if ( !Array.prototype.forEach ) &#123;    Array.prototype.forEach = function for
     
     
     
-    
-    
-    
-    
     <div class="total-and-search">
         <div class="total-archive">
         Total : 4
@@ -597,17 +593,17 @@ if ( !Array.prototype.forEach ) &#123;    Array.prototype.forEach = function for
     
     
         <li class="archive-post-item">
-            <span class="archive-post-date">07/25</span><a class="archive-post-title" href= "/2018/07/25/forEach兼容写法/" >forEach兼容写法</a>
-        </li>
-    
-    
-        <li class="archive-post-item">
             <span class="archive-post-date">07/25</span><a class="archive-post-title" href= "/2018/07/25/让h5页面强制横屏/" >让h5页面强制横屏</a>
         </li>
     
     
         <li class="archive-post-item">
-            <span class="archive-post-date">07/13</span><a class="archive-post-title" href= "/2018/07/13/第一篇/" >使用hexo搭建博客时遇到的问题</a>
+            <span class="archive-post-date">07/25</span><a class="archive-post-title" href= "/2018/07/25/forEach兼容写法/" >forEach兼容写法</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">07/13</span><a class="archive-post-title" href= "/2018/07/13/使用hexo搭建博客时遇到的问题/" >使用hexo搭建博客时遇到的问题</a>
         </li>
     
     </div>
@@ -617,13 +613,13 @@ if ( !Array.prototype.forEach ) &#123;    Array.prototype.forEach = function for
     
         <span class="sidebar-tag-name" data-tags="javaScript"><span class="iconfont-archer">&#xe606;</span>javaScript</span>
     
+        <span class="sidebar-tag-name" data-tags="react"><span class="iconfont-archer">&#xe606;</span>react</span>
+    
         <span class="sidebar-tag-name" data-tags="技巧"><span class="iconfont-archer">&#xe606;</span>技巧</span>
     
         <span class="sidebar-tag-name" data-tags="心得"><span class="iconfont-archer">&#xe606;</span>心得</span>
     
         <span class="sidebar-tag-name" data-tags="文章"><span class="iconfont-archer">&#xe606;</span>文章</span>
-    
-        <span class="sidebar-tag-name" data-tags="react"><span class="iconfont-archer">&#xe606;</span>react</span>
     
     </div>
     <div class="iconfont-archer sidebar-tags-empty">&#xe678;</div>
