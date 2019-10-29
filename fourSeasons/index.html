@@ -306,6 +306,7 @@
                     fluid: true,            
                 }, 
                 function () {  
+                    console.log("加载完成");
                     //重新加载视频
                     this.load();     
                     //开始播放                                                         
@@ -337,6 +338,7 @@
                 $(this).fadeOut("slow");
                 $("#root").addClass("bg-img");
                 $("#video").show();
+                console.log("开始播放");
                 player.play();                
             });
             //结束封面点击回到首页
