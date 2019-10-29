@@ -162,6 +162,8 @@
 
         .two-step img{
             /* animation: twinkle 2s ease-in infinite; */
+            width: 100%;
+            height: 100%;
             position: absolute;
             top: 0;
             left: 0;
@@ -170,18 +172,21 @@
         .two-step h2{
             color: #fff;
             font-weight: 700;
-            margin: 10px 0 20px;
+            margin: 5px 0 10px;
+            z-index: 1; 
         }
         
         .two-step p{
             color: #fff;
             font-size: 16px;
-            margin-bottom: 30px;
+            margin-bottom: 20px;
+            z-index: 1; 
         }
 
         .two-step .reading{
             color: #fff;
             font-size: 12px;
+            margin-bottom: 20px;
             opacity: 0;
             z-index: 1;            
         }
@@ -227,9 +232,9 @@
         </div>
         <!-- 步骤二 -->
         <div id="twoStep" class="two-step flex flex-v flex-justify-end flex-align-center">
-            <img src="images/logo.gif" width="100%" height="100%" alt="">
-            <!-- <h2>四季银河 心飨臻味</h2>
-            <p>邀请函</p> -->
+            <img src="images/logo.gif" alt="">
+            <h2>四季银河 心飨臻味</h2>
+            <p>邀请函</p>   
             <p id="reading" class="reading">点击敬阅邀请函</p>
         </div>
         <!-- 步骤三 -->
@@ -306,7 +311,6 @@
                     fluid: true,            
                 }, 
                 function () {  
-                    console.log("加载完成");
                     //重新加载视频
                     this.load();     
                     //开始播放                                                         
@@ -319,7 +323,8 @@
                         });                                    
                     });                                
                 }
-            )            
+            )
+
             //首页动画
             function firstPage(){
                 $("#oneStep").fadeOut("slow").siblings().hide();
@@ -338,7 +343,6 @@
                 $(this).fadeOut("slow");
                 $("#root").addClass("bg-img");
                 $("#video").show();
-                console.log("开始播放");
                 player.play();                
             });
             //结束封面点击回到首页
