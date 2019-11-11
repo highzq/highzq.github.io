@@ -1,0 +1,189 @@
+<!doctype html>
+<html>
+ <head>
+  <!--声明当前前页面的编码集：charset-gbk gb2312（中文编码） UTF-8国际编码-->
+  <!--当前页面三要素-->
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  <meta name="Keywords" content="">
+  <meta name="Description" content="">
+  <title>炫酷照片墙</title>
+	<!--css 叠层样式-->
+	<style type="text/css">
+	*{padding:0;margin:0;}	
+	html{height:100%;}
+	body{height:100%;font-size:14px;font-family:"微软雅黑";background:
+		linear-gradient(45deg, #92baac 45px, transparent 45px)64px 64px,
+		linear-gradient(45deg, #92baac 45px, transparent 45px,transparent 91px, #e1ebbd 91px, #e1ebbd 135px, transparent 135px),
+		linear-gradient(-45deg, #92baac 23px, transparent 23px, transparent 68px,#92baac 68px,#92baac 113px,transparent 113px,transparent 158px,#92baac 158px);
+		background-color:#e1ebbd;
+		background-size: 128px 128px;}
+	a{text-decoration:none;color:#333;}
+	li{list-style:none;}
+	#wrap{width:90%;height:90%;position:absolute;top:5%;left:5%;}
+	#wrap ul li{width:125px;height:125px;box-shadow:0 0 1px #000;position:absolute;transition:all 1s ease;}
+	#wrap ul li img{transform:scale(0.95);transition:transform 1s ease;}
+	#wrap div a{display:none;width:20px;height:50px;background:#33ccff;color:#fff;text-align:center;position:absolute;z-index:5;top:45%;padding:5px;}
+	#a_left{left:-35px}
+	#a_right{right:-35px}
+	</style>
+ </head>
+ <body onselectstart="return false">
+	
+	<div id="wrap">
+		<ul>
+		</ul>
+		<div>
+			<a href="javascript:void(0);" id="a_left">下一张</a>
+			<a href="javascript:void(0);" id="a_right">上一张</a>
+		</div>
+	</div>
+
+ 
+	<script type="text/javascript" src="js/jquery-1.11.2.min.js	"></script>
+	<script text="text/javascript">
+		$(function(){
+			var $ul = $("#wrap ul");
+			var $wrap = $("#wrap");
+			var $btn = $("#wrap div a")
+			init();//创建li
+			var $li = $("#wrap ul li");
+			var $img = $("#wrap ul li img");
+			var onOff = true;//li控制锁
+			var index= 0;
+			var btnTime = 0;//切换按钮的间隔时间
+			var liTime = 0;//li点击的间隔时间
+			function init(){
+				for(var i=0;i<24;i++){
+					var $li = $("<li><img src='images/"+(i+1)+".jpg'></li>");
+					$ul.append($li);
+				};			
+			};
+			liPosition();//初始化li的定位
+			liRotate();//随机li的旋转角度
+			//改变窗口大小时，重新调整li的位置
+			$(window).resize(liPosition);
+			//li的初始定位
+			function liPosition(){
+				var wrapWidth = $wrap.width();//求出父元素的宽度
+				var wrapHeight = $wrap.height();
+				var w = (wrapWidth - 125*6)/5;//求出每个li之间的间隔
+				var h = (wrapHeight - 125*4)/3;
+				$li.each(function(i){
+					var ix = i%6;//比6小i不变
+					var iy = parseInt(i/6);//比6小的数除6都是小数，否则就为1
+					$(this).css({
+					left:(125*ix+w*ix),
+					top:(125*iy+h*iy),
+					backgroundPosition:-ix*125+"px "+(-iy*125)+"px"
+					});
+				});
+			}
+			//li的随机旋转度数
+			function liRotate(){
+				$li.each(function(i){
+					var r = (Math.random()-0.5) * 60;
+					$(this).css("transform","rotate("+r+"deg)");
+				});
+			};
+				
+			//点击li对象的时候
+			$li.click(function(){
+				if(new Date()-liTime > 1000){
+					liTime = new Date();
+					if(onOff){//点一下就合并
+						index = $(this).index()
+						$img.css("transform","scale(1)");
+						setTimeout(function(){
+							liclick();
+							$img.fadeOut(800);//只有把子元素的img隐藏掉li元素的图片才能显示
+							$li.css("backgroundImage","url(images/big/"+(index+1)+".jpg)");
+						},300);
+						$btn.show();//显示按钮
+						//解绑liPosition事件
+						$(window).off("resize").resize(liclick);
+						onOff = false;
+					}else{//在点击就还原
+						liPosition();
+					
+						liRotate();
+						$img.fadeIn(800,function(){
+							$li.css("backgroundImage","");
+							$(this).css("transform","scale(0.95)");
+						});
+						$btn.hide();
+						//解绑窗口移动事件
+						$(window).off("resize").resize(liPosition);
+						onOff = true;
+					}
+				}
+
+			});
+			//li元素居中
+			function liclick(){
+				var wrapWidth = $wrap.width();
+				var wrapHeight = $wrap.height();
+				var l = (wrapWidth-125*6)/2;
+				var t = (wrapHeight -125*4)/2;
+				$li.each(function(i){
+					var ix = i%6;
+					var iy = parseInt(i/6);
+					$(this).css({left:ix*125+l,top:iy*125+t,transform:"rotate(0deg)"});
+				});
+			};
+
+			//点击btn按钮，边界判断
+			$btn.click(function(){
+				if(new Date() - btnTime>1200){
+					var i = $(this).index();
+					if(i){
+						index>=$li.length-1?index=0:index++;
+
+					}else{
+						index<=0?index=$li.length-1:index--;
+					}
+					liBackground();	
+					btnTime = new Date();
+				}
+
+			});
+
+			
+			//li的大背景随按钮进行切换
+			function liBackground(){
+				var arr = [];
+				for(var i=0;i<24;i++){
+					arr[i] = i;
+				}
+				var timer = setInterval(function(){
+					var r = Math.floor(Math.random()*arr.length);
+					$li.eq(arr[r]).css("backgroundImage","url(images/big/"+(index+1)+".jpg)");
+					arr.splice(r,1);//把随机到的数从数组中删除
+					if(arr.length == 0){
+						clearInterval(timer);
+					}
+				},40);	
+			};
+			
+
+
+
+
+
+
+
+
+
+
+
+
+
+		});
+
+
+
+	</script>
+ </body>
+</html>
+
+
+

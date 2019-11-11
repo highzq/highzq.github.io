@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<meta name="Keywords" content="">
+	  	<meta name="Description" content="">
+		<title></title>
+		<style type="text/css" id="css">
+		*{margin: 0;padding: 0;}
+		li{list-style: none;}
+		#banner{width: 1000px;height: 500px;background: pink;margin: 50px auto;perspective: 800px;position: relative;}
+		#banner li{height: 500px;float: left;position: relative;transform-style: preserve-3d;transform:translateZ(-250px);}
+		#banner li div{height: 500px;font-size: 30px;line-height: 500px;text-align: center;position: absolute;}
+		
+		/*上面 */
+		#banner li div:nth-child(1){bottom:500px;transform-origin:bottom;transform:translateZ(250px) rotateX(90deg);background:url(http://img.ui.cn/data/upload/201603/1458732491_354.jpeg?v=1459505269)no-repeat;}
+		/*下面 */
+		#banner li div:nth-child(2){top:500px;transform-origin:top;transform:translateZ(250px) rotateX(-90deg);background:url(http://img.ui.cn/data/upload/201603/1459317365_866.jpeg?v=1459505269)no-repeat;}
+		/*前面*/
+		#banner li div:nth-child(3){transform: translateZ(250px);background:url(http://img.ui.cn/data/upload/201602/1456473350_132.jpeg?v=1459505269)no-repeat;}
+		/*后面*/
+		#banner li div:nth-child(4){transform: translateZ(-250px) rotateX(180deg);background:url(http://img.ui.cn/data/upload/201603/1458709126_297.jpeg?v=1459505269)no-repeat;}
+	
+		/*小按钮*/
+		#banner #b_btn{position: absolute;left: 45%;bottom: 20px;}
+		#banner #b_btn a{display:block;width: 15px;height: 15px;border-radius: 50%;background: #fff;float: left;margin-left:8px;}
+		#banner #b_btn .on{background: orangered;}
+		</style>
+	</head>
+	<body>
+		
+		<div  id="banner">
+			<ul id="listbox">
+			
+			</ul>
+			<div id="b_btn">
+				<a href="javascript:void(0)" class="on"></a>
+				<a href="javascript:void(0)"></a>
+				<a href="javascript:void(0)"></a>
+				<a href="javascript:void(0)"></a>
+			</div>
+		</div>
+	
+	<script type="text/javascript">
+		window.onload= function(){
+			var ulbox = document.getElementById("b_btn");//按钮父元素
+			var btns = ulbox.children;//按钮集合
+			var ul =document.getElementById("listbox");//ul元素
+			var liDoms = document.getElementById("listbox").children;//获取ul下面的子元素
+			var licss =document.getElementById("css");//style标签
+			var bWidth = document.getElementById("banner").offsetWidth;
+			init(100);
+			for(var i=0;i<btns.length;i++){
+				(function(i){//闭包锁起来
+					btns[i].onclick =function(){
+							licss.innerHTML  += "#banner ul li{transform:translateZ(-250px) rotateX("+(i*-90)+"deg)}";
+							for(var j=0;j<btns.length;j++){
+								btns[j].className = "";
+							}
+							this.className = "on";
+					};
+				})(i);
+			}
+			
+			//划分ul下面li的个数 即长方体的个数
+			function init(num){//4
+				var uHTML = "",pHTML="",tHTML="",zHTML="",z=0;
+				//获取每个li的宽度
+				var liW = bWidth/num;
+				for(var i=0;i<num;i++){//012  3  li==4  i=3
+					if(i>num/2){
+						z--;
+						zHTML += "#banner ul li:nth-child("+(i+1)+"){z-index:"+z+"}";
+					}	
+					uHTML += "<li><div></div><div></div><div></div><div></div></li>";
+					//#banner ul li:nth-child(1) div{background-position:0px;} 
+					pHTML += "#banner ul li:nth-child("+(i+1)+") div{background-position:"+(-i*liW)+"px;}";
+					tHTML += "#banner ul li:nth-child("+(i+1)+"){transition:1s "+2*i/num+"s;}";
+				}
+				ul.innerHTML = uHTML;
+				licss.innerHTML += zHTML+pHTML+tHTML+"#banner ul li,#banner ul li div{width:"+liW+"px}";
+			};
+		};
+	</script>
+	</body>
+</html>

@@ -1,0 +1,4 @@
+[0323/140757:ERROR:gpu_info_collector_win.cc(147)] Could not read gaming score from assessment results.
+[0323/140757:ERROR:proxy_service_factory.cc(105)] Cannot use V8 Proxy resolver in single process mode.
+[0323/140828:ERROR:gpu_info_collector_win.cc(147)] Could not read gaming score from assessment results.
+[0323/140829:ERROR:renderer_main.cc(227)] Running without renderer sandbox

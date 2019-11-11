@@ -1,0 +1,223 @@
+<!doctype html>
+<html lang="en">
+ <head>
+  <meta charset="UTF-8">
+  <meta name="Generator" content="EditPlus®">
+  <meta name="Author" content="">
+  <meta name="Keywords" content="">
+  <meta name="Description" content="">
+  <title>Document</title>
+  <style>
+	*{padding:0;margin:0}
+	body{font-size:14px;font-family:"微软雅黑";background:#333}
+	a{text-decoration:none;color:#333}
+	li{list-style:none}
+	
+	/*万年历*/
+	.cal1 .clndr .clndr-controls{position:relative;color:#280606r;font-size:0.8em;min-height:78px;}
+	 .cal1 .clndr .clndr-controls .month{padding:20px 0;text-align:center;color:#C3C3E5;font-size:22px;}
+	 .cal1 .clndr .clndr-controls table{width:100%;height:inherit;text-align:center;font-size:14px;border-collapse: collapse;}
+	 .cal1 .clndr .clndr-controls table thead{}
+	 .cal1 .clndr .clndr-controls table thead .header-day{font-size:16px;font-weight:600;border:1px solid #000;line-height:40px;}
+	 .cal1 .clndr .clndr-controls table tbody .day{border:1px solid #000;line-height:55px;color: #3a3b36;}
+	  .cal1 .clndr .clndr-controls table tbody td:hover{background:#eee;}
+	 .cal1 .clndr .clndr-controls table tbody .today{background:#333;color:#fff;}
+	
+
+	.clndr-button{position:absolute;top:13px;background:url("images/arrows.png")no-repeat;width:35px;height:45px;display:block;cursor:pointer}
+	.g_prev{background-position:0px 0px;left:5px;}
+	.g_next{background-position:-25px 0px;right:5px;}
+	
+	#box{width:700px;margin:100px auto;}
+	#box2{width:400px;margin:100px auto;}
+  </style>
+ </head>
+ <body>
+
+	
+	
+
+	
+	<div id="box"></div>
+	<div id="box2"></div>
+
+
+<script src="js/Gdom.js"></script>
+<script>
+	
+	window.onload = function(){
+		
+	};
+
+var Calender = (function(){
+		var GaoCalender = function(opts){
+			this.id = opts.id;
+			this.defaults = {
+				//width:600,
+			//	height:600,
+				background:"#fff",
+				color:"#999"
+			};
+			this.options = mix(this.defaults,opts);//混入
+
+		};
+		//静态常量
+		GaoCalender.WEEKS= ["星期日","星期一","星期二","星期三","星期四","星期五","星期六"];
+		GaoCalender.MONTHS = ["一月","二月","三月","四月","五月","六月","七月","八月","九月","十月","十一月","十二月"];
+
+		
+		GaoCalender.prototype = {
+			consturctor:GaoCalender,
+			init:function(){
+				var args = arguments;
+				var year = "",month="";
+				if(args.length==2){
+					year = args[0];
+					month = args[1];
+				}else{
+					var date = new Date();
+					year = date.getFullYear();
+					month = date.getMonth()+1;
+				}
+				//初始化模板
+				var domObj = this.template(year,month);
+				
+			},
+			template:function(year,month){
+				var $calc = this;
+				var boxDom = dom($calc.id);
+				var html = "<div class='cal1'>"+
+					"<div class='clndr'>"+
+					"	<div class='clndr-controls'>"+
+					"		<div class='clndr-control-button'>"+
+					"			<p class='clndr-button g_prev'></p>"+
+					"		</div>"+
+					"		<div class='month'>"+GaoCalender.MONTHS[month-1]+"/ "+year+"</div>"+
+					"		<div class='clndr-control-button rightalign'>"+
+					"			<p class='clndr-button g_next'></p>"+
+					"		</div>"+
+					"		<div id='g_cacle"+$calc.id+"'></div>"+
+					"	</div>"+
+					"</div>"+
+				"</div>";
+				boxDom.innerHTML = html;
+				//给盒子添加样式，如颜色，宽高，等等
+				$calc.css(boxDom,$calc.options);
+				//绑定事件，上一月，下一月
+				$calc.prevEvent(boxDom,year,month);
+				$calc.nextEvent(boxDom,year,month);
+				//创建一个表格
+				var tableDom = $calc.element("table");
+				//创建表头
+				var theadDom = $calc.element("thead");
+				//创建一个tr
+				var trDom = $calc.element("tr");
+				for(var i=0,len=GaoCalender.WEEKS.length;i<len;i++){
+					var tdDom = $calc.element("td");
+					$calc.addClass(tdDom,"header-day");
+					tdDom.innerHTML = GaoCalender.WEEKS[i];
+					$calc.append(trDom,tdDom);
+				};
+				//将行添加到表头中
+				$calc.append(theadDom,trDom);
+				//创建表体
+				var tbodyDom = $calc.element("tbody");
+				
+				//获取当月天数
+				var days = $calc.getMonthDay(year,month-1);//当月天数
+				//创建每个月的第一天的日前对象
+				var date = new Date(year,month-1,1);
+				var currentDate = new Date();
+				var cdate = currentDate.getDate();
+				//获取每个月的第一天是星期几
+				var week = date.getDay();
+				var j = 0;//记录天数
+				var tdHtml = "";
+				
+				while(true){
+					tdHtml+="<tr>"
+					//拿到一个月有多少天
+					//拿到这个月第一天是星期几
+					for(i=0;i<=6;i++){
+						var mark = "day";
+						if(j==0 && i==week){
+							j++;
+							if(j==cdate)mark = "day today";
+							tdHtml += "<td class='"+mark+"'>1</td>";
+						}else if(j>0 && j<=days){
+							j++;
+							if(j==cdate)mark = "day today";
+							tdHtml +="<td class='"+mark+"'>"+j+"</td>" 
+						}else{//都不满足就天空格
+							tdHtml += "<td class='day'></td>";
+						}
+					}
+					tdHtml+="</tr>";
+					if(j>=days)break;
+				};
+				//追加拼接的日期文本
+				tbodyDom.innerHTML = tdHtml;
+				//追加元素
+				$calc.append(tableDom,theadDom);
+				$calc.append(tableDom,tbodyDom);
+				$calc.append(dom("g_cacle"+$calc.id),tableDom);	
+				return boxDom;
+			},//下一年
+			nextEvent:function(dom,year,month){
+				var $calc = this;
+				domClass(dom,"g_next")[0].onclick = function(){
+					
+					var m = month+1;
+					var y = year;
+					if(m>12){
+						y = year+1;
+						m=1;
+					}
+			
+					$calc.template(y,m);
+				};
+			},//上一年
+			prevEvent:function(dom,year,month){
+				var $calc = this;
+				domClass(dom,"g_prev")[0].onclick = function(){
+					var m = month-1;
+					var y = year;
+					if(m==0){
+						y = year-1;
+						m = 12;
+					}
+					$calc.template(y,m);
+				};
+			},
+			getMonthDay:function(year,month){//获取当月的天数
+				return new Date(year,month,0).getDate();
+			},
+			addClass:function(dom,className){//添加样式
+				dom.className = className;
+			},
+			append:function(dom,subdom){//追加元素
+				dom.appendChild(subdom);
+			},
+			element:function(ele){//创建元素
+				return document.createElement(ele);
+			},
+			css:function(dom,opts){
+				for(var key in opts){
+					var v = opts[key];
+					dom.style[key] = (typeof v==="number"?v+"px":v);
+				}
+			}
+		
+		};
+
+		return GaoCalender;
+	})();
+		
+	var cl = new Calender({id:"box",background:"radial-gradient(#cc3333,#ff9900)"});
+	cl.init(2016,3);
+	var c2 = new Calender({id:"box2"});
+	c2.init(2017,3);
+
+</script>
+</body>
+</html>

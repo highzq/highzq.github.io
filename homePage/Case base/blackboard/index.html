@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html ondragstart="return true">
+	<head>
+		<meta charset="utf-8" />
+		<meta name="Keywords" content="">
+	  	<meta name="Description" content="">
+		<title></title>
+		<style type="text/css">
+			*{margin: 0;padding: 0;}
+			body{background: #000;-webkit-user-select:none;}
+			#box{border-radius: 10px;background: #fff;width: 1000px;height: 620px;float: left;border-right:1px solid #000;}
+			button{width:50px;height: 20px;color: #fff;line-height: 20px;text-align: center;background: #000;border-radius: 5px);border:1px solid #fff;outline: none;}
+			button:hover{background: #666;}
+			#saveimg{width: 300px;height: 225px;background: #fff;}
+			#canvas{background: #fff;}
+		</style>
+	</head>
+	<body>
+		<input type="color" id="colors"/>
+		<select name="" id="size">
+			<option>画笔大小</option>
+			<option>1</option>
+			<option>3</option>
+			<option>5</option>
+			<option>7</option>
+			<option>9</option>
+			<option>11</option>
+			<option>13</option>
+			<option>15</option>
+		</select>
+		<button id="btn">清空</button>
+		<button id="btn_y">预览</button>
+		<div id="box">
+			<canvas id="canvas" width="1000" height="620"></canvas>
+		</div>
+		<img id="saveimg" />
+		
+
+		
+
+		<script type="text/javascript">
+			var canvas;
+			var  ctx;
+		window.onload=  function(){
+			//1. 获取canvas对象
+			canvas = dom("canvas");
+			//2.获取上下文绘画环境
+			ctx =canvas.getContext("2d");
+			//添加用于实现绘画操作的事件
+			canvas.onmousedown = startDrawing;
+			canvas.onmousemove = draw;
+			canvas.onmouseup = stopDrawing;
+			//canvas.onmouseout = stopDrawing;
+		};
+		
+			//定义锁
+			var isDrawing = false;
+			
+			function startDrawing(e){
+				isDrawing = true;
+				ctx.beginPath();//准备开始 绘画
+				var x = (e.clientX || e.pageX)- this.offsetLeft;//减去元素距离浏览器的距离
+				var y = (e.clientY || e.pageY) - this.offsetTop;
+				var color = dom("colors").value;//动态获取颜色
+				var size = dom("size").value;//动态获取笔画大小
+				ctx.strokeStyle = color;//颜色
+				ctx.lineWidth = size;//画笔大小
+				ctx.moveTo(x,y);//开始绘画位置
+				};
+				//鼠标 移动
+				function draw(e){
+					if(isDrawing == true){
+						var x = (e.clientX || e.pageX)- this.offsetLeft;
+						var y = (e.clientY || e.pageY) - this.offsetTop;
+						ctx.lineTo(x,y);//终止位置
+						ctx.stroke();//绘画 显示
+					}
+				};
+				//鼠标 松开,锁住移动事件
+				function stopDrawing(){
+					isDrawing = false;
+				};
+			
+
+			
+
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			//清空画布
+			dom("btn").onclick=function(){
+				ctx.clearRect(0,0,1100,620);
+			};
+			//预览方法
+			dom("btn_y").onclick=function(){
+				var img = dom("saveimg");
+				//生成一个图片路径
+				img.src = canvas.toDataURL();
+			};
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			function dom(id){
+				return document.getElementById(id);
+			};
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+		</script>
+	</body>
+</html>

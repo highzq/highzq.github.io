@@ -1,0 +1,360 @@
+<!doctype html>
+<html>
+ <head>
+  <!--声明当前前页面的编码集：charset-gbk gb2312（中文编码） UTF-8国际编码-->
+  <!--当前页面三要素-->
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  <meta name="Keywords" content="">
+  <meta name="Description" content="">
+  <title></title>
+	<link href="css/animate.css" rel="stylesheet"></link>
+	<style type="text/css">
+	*{padding:0;margin:0;}	
+	body{font-size:14px;font-family:"微软雅黑";background:url("images/bg.jpg") no-repeat;background-size:cover;color:#DEBEC8;font-size:16px;}
+	a{text-decoration:none;color:#021825;}
+	li{list-style:none;}
+	.phone{width:322px;height:635px;margin:30px auto;position:relative;z-index:20;}
+	.phone .p_top{height:42px;background:url("images/phone_top.jpg");}
+	.phone .p_info{height:20px;background:url("images/top.gif");}
+	.phone .p_title{width:320px;height:40px;background:#000;font-size:30px;border-left:1px solid #fff;border-right:1px solid #fff;text-align:center;line-height:40px;color:#DA1212;}
+	.phone .p_con{width:320px;height:486px;background:url("images/g_bg.jpg");background-size:cover;border-left:1px solid #fff;border-right:1px solid #fff;position:relative;overflow:hidden;}
+	.phone .p_con #lrclist{width:320px;text-align:center;transition:all .5s ease;}
+	.phone .p_con #lrclist li{height:24px;padding:8px 0;}
+	  .phone .p_con .c_lists{position: absolute;top:0;left:0;}
+	.phone .p_con .c_lists .c_list1{overflow:hidden;height:486px;position:relative;}
+	.phone .p_bottom{height:47px;background:url("images/phone_bottom.jpg");}
+	.phone .p_music{display:inline-block;background:url("images/normalmusic.svg");width:40px;height:40px;border-radius:50%;position:absolute;background-size:cover;top:110px;right:10px;}
+	#lrclist li.hover{
+		color:#57D548;
+		font-size:20px;
+		font-weight:700
+	}
+	.phone .p_a{width:22px;height:70px;padding:20px 8px 0;background:#2096f9;border:1px solid #2096f9;border-radius:0 5px 5px 0;display:block;text-align:center;color:#fff;position:absolute;top:0;right:-40px;} 
+	.phone .p_a:hover{background:#fff;color:#2096f9;}
+	.phone .p_prve{top:150px;}
+	.phone .p_next{top:290px;}
+	.move1{animation:move1 2s linear infinite}
+
+
+	@-webkit-keyframes move1{ 
+		0%{-webkit-transform:rotate(0deg);}
+		100%{-webkit-transform:rotate(360deg);}
+	
+	}
+	#qx {width: 246px;
+		height: 78px;
+		background: url(images/love.jpg);
+		background-size: cover;
+		position: absolute;
+		bottom: 12px;
+		left: 40px;
+	}
+	#xh1 {
+		width: 148px;
+		height: 214px;
+		background: url(images/1.gif);
+		background-size: cover;
+		position: absolute;
+		left: 10px;
+		top: 162px;
+	}
+	#xh2 {
+		position: absolute;
+		top: 162px;
+		right: 10px;
+		width: 176px;
+		height: 138px;
+		background: url(images/2.gif);
+		background-size: cover;
+	}
+
+	#shake{position:absolute;top:34px;left:65px;}
+	#c_list3 .span1{position:absolute;top:200px;left:96px;}
+	#c_list3 .span2{position:absolute;top:215px;left:0px;background:url("images/4.gif");width:640px;height:300px;display:block;}
+	#wx{position:absolute;top:50px;left:70px;}
+	#wx2{position:absolute;top:270px;left:70px;}
+	#wx3{position:absolute;top:370px;left:115px;color:#fff;font-size:24px;}
+	.qrcode{width:150px;height:145px;background:#fff;text-align:center;line-height:150px;position:absolute;top:300px;right:500px;padding-top:7px;z-index:1}
+	@media screen and (max-width:320px){
+		.phone{margin-top:-120px;}
+		.phone .p_bottom{display:none;}
+	}
+	</style>
+ </head>
+ <body>
+	
+
+	<div class="phone">
+		<div class="p_top"></div>
+		<div class="p_info"></div>
+		<div class="p_title">追梦赤子心</div>
+		<div class="p_con">
+			<ul class="c_lists">
+				<li class="c_list1">
+					<ul id="lrclist"></ul>
+				</li>
+				<li id="c_list2" class="c_list1">
+					<div id="qx"></div>
+					<div id="xh1"></div>
+					<div id="xh2"></div>
+				</li>
+				<li class="c_list1" id="c_list3">
+					<img id="shake" src="images/2.jpg"width="196" height="142" alt="2" /> 
+					<span id="shake2" class="span1">童话故事·紫霞仙子</span>
+					<span id="shake3" class="span2">
+					</span>
+				</li>
+				<li class="c_list1" id="c_list4">
+					<img id="wx" src="images/wx.jpg"width="182" height="182" alt="2" />
+					<font id="wx2" size="3" color="#f7951e">（微信号：Mo JunYe1992）</font>
+					<a id="wx3" href="#" target="_0">点击关注</a>
+				</li>
+			</ul>
+		</div>
+		<div class="p_bottom"></div>
+		<a href="#" class="p_music move1" id="p_music"></a>
+		<a href="javascript:void(0)" class="p_a p_prve">上一页</a>
+		<a href="javascript:void(0)" class="p_a p_next">下一页</a>
+	</div>
+	<div class="qrcode">
+		<img src="images/qrcode.jpg">
+	</div>
+	<textarea id="lrcnt" style="display:none;">
+		[ti:追梦赤子心]
+		[ar:GALA]
+		[al:追梦痴子心]
+		[offset:0]
+
+		[00:00.00]GALA---追梦赤子心
+		[00:04.57]
+		[00:15.33]充满鲜花的世界到底在哪里
+		[00:21.31]如果它真的存在那么我一定会去
+		[00:28.76]我想在那里最高的山峰矗立
+		[00:34.18]不在乎它是不是悬崖峭壁
+		[00:38.87]
+		[00:42.01]用力活着用力爱哪怕肝脑涂地
+		[00:47.83]不求任何人满意只要对得起自己
+		[00:55.20]关于理想我从来没选择放弃
+		[01:00.66]即使在灰头土脸的日子里
+		[01:06.44]
+		[01:07.39]也许我没有天分
+		[01:10.60]但我有梦的天真
+		[01:13.90]我将会去证明用我的一生
+		[01:20.64]也许我手比脚笨
+		[01:23.85]但我愿不停探寻
+		[01:27.26]付出所有的青春不留遗憾
+		[01:32.69]
+		[01:34.61]向前跑 迎着冷眼和嘲笑
+		[01:40.16]生命的广阔不历经磨难怎能感到
+		[01:47.13]命运它无法让我们跪地求饶
+		[01:54.71]就算鲜血洒满了怀抱
+		[01:59.62]
+		[02:00.98]继续跑 带着赤子的骄傲
+		[02:07.69]生命的闪耀不坚持到底怎能看到
+		[02:14.02]与其苟延残喘不如纵情燃烧吧
+		[02:22.16]有一天会再发芽
+		[02:29.03]
+		[02:55.66]未来迷人绚烂总在向我召唤
+		[03:00.58]哪怕只有痛苦作伴也要勇往直前
+		[03:08.47]我想在那里最蓝的大海扬帆
+		[03:14.18]绝不管自己能不能回还
+		[03:19.62]
+		[03:20.99]失败后郁郁寡欢
+		[03:23.86]那是懦夫的表现
+		[03:27.29]只要一息尚存请握紧双拳
+		[03:34.11]在天色破晓之前
+		[03:37.27]我们要更加勇敢
+		[03:40.74]等待日出时最耀眼的瞬间
+		[03:46.07]
+		[03:47.77]向前跑 迎着冷眼和嘲笑
+		[03:54.10]生命的广阔不历经磨难怎能感到
+		[04:01.11]命运它无法让我们跪地求饶
+		[04:08.03]就算鲜血洒满了怀抱
+		[04:12.44]
+		[04:14.31]继续跑 带着赤子的骄傲
+		[04:20.92]生命的闪耀不坚持到底怎能看到
+		[04:27.37]与其苟延残喘不如纵情燃烧
+		[04:35.17]为了心中的美好
+		[04:42.18]不妥协直到变老
+		[04:48.66]
+	</textarea>
+	<audio id="audio" src="mp3/1.mp3" autoplay></audio>
+
+	<script src="js/jquery-1.11.2.min.js"></script>
+	<script type="text/javascript">
+	
+
+		function dom(id){
+			return document.getElementById(id);
+		};
+
+		var audioDom = dom("audio");
+		window,onload = function(){
+			lrc.init(dom("lrcnt").value);
+			//歌词的监听
+			audioDom.addEventListener("timeupdate",function(){
+				var t = parseInt(this.currentTime);//获取已播放时间
+				lrc.jump(t);
+			});
+			dom("p_music").onclick = function(){
+				lrc.play.call(this);
+			};
+		}
+
+		//一个对象
+		var lrc = {
+			regex_trim:/^\s+|\s$/,
+			//歌词解析
+			init:function(lrctxts){
+				var txts=lrctxts.split("\n");//将字符串中空格分割的内容变成数组
+				var html = "";
+				//的到每隔一个歌词
+				for(var i=0;i<txts.length;i++ ){
+					//去除歌词的空空格
+					var item = txts[i].replace(this.regex_trim,"");
+					//歌词和时间的分割
+					var ms = item.split("]");
+					//把歌词转成秒，绑定给对应的歌词
+					var mt = ms[0].replace("[","").split(":");
+					var m = parseInt(mt[0]*60+mt[1]*1);
+					//获取歌词
+					var txt = ms[1];
+					if(txt){
+						html +="<li id='t_"+m+"'>"+txt+"</li>";
+					}
+				}	
+				dom("lrclist").innerHTML += html;//把歌词放进去
+			},
+			jump:function(duration){
+				var Dom = dom("t_"+duration);
+				var lrcbox = dom("lrclist");//ul元素
+				if(Dom){
+					var arr =this.siblings(Dom);//返回不等于当前对象的数组
+					for(var i=0;i<arr.length;i++){
+						arr[i].className = "";//把数组内的对象样式清空
+					}
+					Dom.className = "hover";//给当前对象加上样式
+					var index = this.indexof(Dom)-3;//返回索引
+					//移动相应的位置
+					lrcbox.style.marginTop = (index<0?0:index)*-40+"px";
+				}
+			},
+			//监听当前的播放元素
+			indexof:function(Dom){
+				var listDoms = Dom.parentElement.children;//获取所有同辈元素
+				//遍历获取当前播放的歌词 并且返回他的时间
+				for(var i=0;i<listDoms.length;i++){
+					if(listDoms[i]==Dom){
+						index=i;//获取当前dom在同辈元素中的索引
+					}
+				}
+				return index;
+			},
+			siblings:function(Dom){//传入ID 
+				var listDoms = Dom.parentElement.children;//获取所有同辈元素
+				var arr = [];
+				//遍历获取当前播放的歌词 并且返回他的时间
+				for(var i=0;i<listDoms.length;i++){
+					if(listDoms[i]!=Dom){//不等于当前对象的全部放入数组
+						arr.push(listDoms[i]);
+					}
+				}
+				return arr;
+			},
+			play:function(){//是暂停的话就play，播放的话就pause
+				if(audioDom.paused){
+					audioDom.play();
+					this.className += " move1";//旋转动画
+				}else{
+					audioDom.pause();
+					this.className = "p_music";
+				};
+			}
+		};
+
+		var index =0;
+		var len = $(".c_lists").children().length;
+		$("#p_music").addClass("animated rubberBand");
+		$(".p_prve").on("click",function(){
+			index<=0?index=len-1:index--;
+			$(".c_lists").animate({top:(index*-486)});
+			if(index==0){
+				$("#lrclist").addClass("animated bounceInUp");
+				setTimeout(function(){
+					$("#lrclist").removeClass("bounceInUp");
+				},900);
+			}else if(index==1){
+				$("#qx").addClass("animated rubberBand");
+				$("#xh1").addClass("animated bounceInLeft");
+				$("#xh2").addClass("animated bounceInRight");
+				setTimeout(function(){
+					$("#qx").removeClass("rubberBand");
+					$("#xh1").removeClass("bounceInLeft");
+					$("#xh2").removeClass("bounceInRight");
+				},900);
+			}else if(index==2){
+				$("#shake").addClass("animated rubberBand");
+				$("#shake2").addClass("animated rubberBand");
+				$("#shake3").addClass("animated rubberBand");
+				setTimeout(function(){
+					$("#shake").removeClass("rubberBand");
+					$("#shake2").removeClass("rubberBand");
+					$("#shake3").removeClass("rubberBand");
+				},900);
+			}else if(index==3){
+				$("#wx").addClass("animated rotateIn");
+				$("#wx2").addClass("animated rotateIn");
+				$("#wx3").addClass("animated rotateIn");
+				setTimeout(function(){
+					$("#wx").removeClass("rotateIn");
+					$("#wx2").removeClass("rotateIn");
+					$("#wx3").removeClass("rotateIn");
+				},900);
+			}
+		});
+		$(".p_next").on("click",function(){
+			index>=len-1?index=0:index++;
+			$(".c_lists").animate({top:(index*-486)});
+			if(index==0){
+				$("#lrclist").addClass("animated bounceInUp");
+				setTimeout(function(){
+					$("#lrclist").removeClass("bounceInUp");
+				},900);
+			}else if(index==1){
+				$("#qx").addClass("animated rubberBand");
+				$("#xh1").addClass("animated bounceInLeft");
+				$("#xh2").addClass("animated bounceInRight");
+				setTimeout(function(){
+					$("#qx").removeClass("rubberBand");
+					$("#xh1").removeClass("bounceInLeft");
+					$("#xh2").removeClass("bounceInRight");
+				},900);
+			}else if(index==2){
+				$("#shake").addClass("animated rubberBand");
+				$("#shake2").addClass("animated rubberBand");
+				$("#shake3").addClass("animated rubberBand");
+				setTimeout(function(){
+					$("#shake").removeClass("rubberBand");
+					$("#shake2").removeClass("rubberBand");
+					$("#shake3").removeClass("rubberBand");
+				},900);
+			}else if(index==3){
+				$("#wx").addClass("animated rotateIn");
+				$("#wx2").addClass("animated rotateIn");
+				$("#wx3").addClass("animated rotateIn");
+				setTimeout(function(){
+					$("#wx").removeClass("rotateIn");
+					$("#wx2").removeClass("rotateIn");
+					$("#wx3").removeClass("rotateIn");
+				},900);
+			}
+		});
+	
+	
+	
+	</script>
+ </body>
+</html>
+
+
+
