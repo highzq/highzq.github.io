@@ -1,0 +1,753 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+    <!-- title -->
+
+
+
+
+<!-- keywords -->
+
+
+
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no" >
+    <meta name="author" content="Gao">
+    <meta name="renderer" content="webkit">
+    <meta name="copyright" content="Gao">
+    
+    <meta name="keywords" content="hexo,hexo-theme,hexo-blog">
+    
+    <meta name="description" content="">
+    <meta http-equiv="Cache-control" content="no-cache">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"/>
+    <title>问题整理 · GaoBlog</title>
+    <style type="text/css">
+    @font-face {
+        font-family: 'Oswald-Regular';
+        src: url("/font/Oswald-Regular.ttf");
+    }
+
+    body {
+        margin: 0;
+    }
+
+    header,
+    footer,
+    .back-top,
+    .sidebar,
+    .container,
+    .site-intro-meta,
+    .toc-wrapper {
+        display: none;
+    }
+
+    .site-intro {
+        position: relative;
+        z-index: 3;
+        width: 100%;
+        /* height: 50vh; */
+        overflow: hidden;
+    }
+
+    .site-intro-placeholder {
+        position: absolute;
+        z-index: -2;
+        top: 0;
+        left: 0;
+        width: calc(100% + 300px);
+        height: 100%;
+        background: repeating-linear-gradient(-45deg, #444 0, #444 80px, #333 80px, #333 160px);
+        background-position: center center;
+        transform: translate3d(-226px, 0, 0);
+        animation: gradient-move 2.5s ease-out 0s infinite;
+    }
+
+    @keyframes gradient-move {
+        0% {
+            transform: translate3d(-226px, 0, 0);
+        }
+        100% {
+            transform: translate3d(0, 0, 0);
+        }
+    }
+
+</style>
+
+    <link rel="preload" href= "/css/style.css?v=20180824" as="style" onload="this.onload=null;this.rel='stylesheet'" />
+    <link rel="stylesheet" href= "/css/mobile.css?v=20180824" media="(max-width: 980px)">
+    
+    <link rel="preload" href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.2.5/jquery.fancybox.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'" />
+    
+    <!-- /*! loadCSS. [c]2017 Filament Group, Inc. MIT License */
+/* This file is meant as a standalone workflow for
+- testing support for link[rel=preload]
+- enabling async CSS loading in browsers that do not support rel=preload
+- applying rel preload css once loaded, whether supported or not.
+*/ -->
+<script>
+(function( w ){
+	"use strict";
+	// rel=preload support test
+	if( !w.loadCSS ){
+		w.loadCSS = function(){};
+	}
+	// define on the loadCSS obj
+	var rp = loadCSS.relpreload = {};
+	// rel=preload feature support test
+	// runs once and returns a function for compat purposes
+	rp.support = (function(){
+		var ret;
+		try {
+			ret = w.document.createElement( "link" ).relList.supports( "preload" );
+		} catch (e) {
+			ret = false;
+		}
+		return function(){
+			return ret;
+		};
+	})();
+
+	// if preload isn't supported, get an asynchronous load by using a non-matching media attribute
+	// then change that media back to its intended value on load
+	rp.bindMediaToggle = function( link ){
+		// remember existing media attr for ultimate state, or default to 'all'
+		var finalMedia = link.media || "all";
+
+		function enableStylesheet(){
+			link.media = finalMedia;
+		}
+
+		// bind load handlers to enable media
+		if( link.addEventListener ){
+			link.addEventListener( "load", enableStylesheet );
+		} else if( link.attachEvent ){
+			link.attachEvent( "onload", enableStylesheet );
+		}
+
+		// Set rel and non-applicable media type to start an async request
+		// note: timeout allows this to happen async to let rendering continue in IE
+		setTimeout(function(){
+			link.rel = "stylesheet";
+			link.media = "only x";
+		});
+		// also enable media after 3 seconds,
+		// which will catch very old browsers (android 2.x, old firefox) that don't support onload on link
+		setTimeout( enableStylesheet, 3000 );
+	};
+
+	// loop through link elements in DOM
+	rp.poly = function(){
+		// double check this to prevent external calls from running
+		if( rp.support() ){
+			return;
+		}
+		var links = w.document.getElementsByTagName( "link" );
+		for( var i = 0; i < links.length; i++ ){
+			var link = links[ i ];
+			// qualify links to those with rel=preload and as=style attrs
+			if( link.rel === "preload" && link.getAttribute( "as" ) === "style" && !link.getAttribute( "data-loadcss" ) ){
+				// prevent rerunning on link
+				link.setAttribute( "data-loadcss", true );
+				// bind listeners to toggle media back
+				rp.bindMediaToggle( link );
+			}
+		}
+	};
+
+	// if unsupported, run the polyfill
+	if( !rp.support() ){
+		// run once at least
+		rp.poly();
+
+		// rerun poly on an interval until onload
+		var run = w.setInterval( rp.poly, 500 );
+		if( w.addEventListener ){
+			w.addEventListener( "load", function(){
+				rp.poly();
+				w.clearInterval( run );
+			} );
+		} else if( w.attachEvent ){
+			w.attachEvent( "onload", function(){
+				rp.poly();
+				w.clearInterval( run );
+			} );
+		}
+	}
+
+
+	// commonjs
+	if( typeof exports !== "undefined" ){
+		exports.loadCSS = loadCSS;
+	}
+	else {
+		w.loadCSS = loadCSS;
+	}
+}( typeof global !== "undefined" ? global : this ) );
+</script>
+
+    <link rel="icon" href= "/assets/favicon.ico" />
+    <link rel="preload" href="https://cdn.jsdelivr.net/npm/webfontloader@1.6.28/webfontloader.min.js" as="script" />
+    <link rel="preload" href="https://cdn.jsdelivr.net/npm/jquery@3.3.1/dist/jquery.min.js" as="script" />
+    <link rel="preload" href="/scripts/main.js" as="script" />
+    <link rel="preload" as="font" href="/font/Oswald-Regular.ttf" crossorigin>
+    <link rel="preload" as="font" href="https://at.alicdn.com/t/font_327081_1dta1rlogw17zaor.woff" crossorigin>
+    
+    <!-- fancybox -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.2.5/jquery.fancybox.min.js" defer></script>
+    <!-- 百度统计  -->
+    
+    <!-- 谷歌统计  -->
+    
+</head>
+
+    
+        <body class="post-body">
+    
+    
+<header class="header">
+
+    <div class="read-progress"></div>
+    <div class="header-sidebar-menu">&#xe775;</div>
+    <!-- post页的toggle banner  -->
+    
+    <div class="banner">
+            <div class="blog-title">
+                <a href="/" >Gao Blog</a>
+            </div>
+            <div class="post-title">
+                <a href="#" class="post-name">问题整理</a>
+            </div>
+    </div>
+    
+    <a class="home-link" href=/>Gao Blog</a>
+</header>
+    <div class="wrapper">
+        <div class="site-intro" style="
+
+
+
+
+
+
+
+height:50vh;
+">
+    
+    <!-- 主页  -->
+    
+    
+    <!-- 404页  -->
+            
+    <div class="site-intro-placeholder"></div>
+    <div class="site-intro-img" style="background-image: url(/intro/post-bg.jpg)"></div>
+    <div class="site-intro-meta">
+        <!-- 标题  -->
+        <h1 class="intro-title">
+            <!-- 主页  -->
+            
+            问题整理
+            <!-- 404 -->
+            
+        </h1>
+        <!-- 副标题 -->
+        <p class="intro-subtitle">
+            <!-- 主页副标题  -->
+            
+            
+            <!-- 404 -->
+            
+        </p>
+        <!-- 文章页meta -->
+        
+            <div class="post-intros">
+                <!-- 文章页标签  -->
+                
+                    <div class= post-intro-tags >
+    
+        <a class="post-tag" href="javascript:void(0);" data-tags = "文章">文章</a>
+    
+</div>
+                
+                
+                    <div class="post-intro-read">
+                        <span>字数统计: <span class="post-count word-count">749</span>阅读时长: <span class="post-count reading-time">3 min</span></span>
+                    </div>
+                
+                <div class="post-intro-meta">
+                    <span class="post-intro-calander iconfont-archer">&#xe676;</span>
+                    <span class="post-intro-time">2020/07/13</span>
+                    
+                    <span id="busuanzi_container_page_pv" class="busuanzi-pv">
+                        <span class="iconfont-archer">&#xe602;</span>
+                        <span id="busuanzi_value_page_pv"></span>
+                    </span>
+                    
+                    <span class="shareWrapper">
+                        <span class="iconfont-archer shareIcon">&#xe71d;</span>
+                        <span class="shareText">Share</span>
+                        <ul class="shareList">
+                            <li class="iconfont-archer share-qr" data-type="qr">&#xe75b;
+                                <div class="share-qrcode"></div>
+                            </li>
+                            <li class="iconfont-archer" data-type="weibo">&#xe619;</li>
+                            <li class="iconfont-archer" data-type="qzone">&#xe62e;</li>
+                            <li class="iconfont-archer" data-type="twitter">&#xe634;</li>
+                            <li class="iconfont-archer" data-type="facebook">&#xe67a;</li>
+                        </ul>
+                    </span>
+                </div>
+            </div>
+        
+    </div>
+</div>
+        <script>
+ 
+  // get user agent
+  var browser = {
+    versions: function () {
+      var u = window.navigator.userAgent;
+      return {
+        userAgent: u,
+        trident: u.indexOf('Trident') > -1, //IE内核
+        presto: u.indexOf('Presto') > -1, //opera内核
+        webKit: u.indexOf('AppleWebKit') > -1, //苹果、谷歌内核
+        gecko: u.indexOf('Gecko') > -1 && u.indexOf('KHTML') == -1, //火狐内核
+        mobile: !!u.match(/AppleWebKit.*Mobile.*/), //是否为移动终端
+        ios: !!u.match(/\(i[^;]+;( U;)? CPU.+Mac OS X/), //ios终端
+        android: u.indexOf('Android') > -1 || u.indexOf('Linux') > -1, //android终端或者uc浏览器
+        iPhone: u.indexOf('iPhone') > -1 || u.indexOf('Mac') > -1, //是否为iPhone或者安卓QQ浏览器
+        iPad: u.indexOf('iPad') > -1, //是否为iPad
+        webApp: u.indexOf('Safari') == -1, //是否为web应用程序，没有头部与底部
+        weixin: u.indexOf('MicroMessenger') == -1, //是否为微信浏览器
+        uc: u.indexOf('UCBrowser') > -1 //是否为android下的UC浏览器
+      };
+    }()
+  }
+  console.log("userAgent:" + browser.versions.userAgent);
+
+  // callback
+  function fontLoaded() {
+    console.log('font loaded');
+    if (document.getElementsByClassName('site-intro-meta')) {
+      document.getElementsByClassName('intro-title')[0].classList.add('intro-fade-in');
+      document.getElementsByClassName('intro-subtitle')[0].classList.add('intro-fade-in');
+      var postIntros = document.getElementsByClassName('post-intros')[0]
+      if (postIntros) {
+        postIntros.classList.add('post-fade-in');
+      }
+    }
+  }
+
+  // UC不支持跨域，所以直接显示
+  function asyncCb(){
+    if (browser.versions.uc) {
+      console.log("UCBrowser");
+      fontLoaded();
+    } else {
+      WebFont.load({
+        custom: {
+          families: ['Oswald-Regular']
+        },
+        loading: function () {  //所有字体开始加载
+          // console.log('loading');
+        },
+        active: function () {  //所有字体已渲染
+          fontLoaded();
+        },
+        inactive: function () { //字体预加载失败，无效字体或浏览器不支持加载
+          console.log('inactive: timeout');
+          fontLoaded();
+        },
+        timeout: 5000 // Set the timeout to two seconds
+      });
+    }
+  }
+
+  function asyncErr(){
+    console.warn('script load from CDN failed, will load local script')
+  }
+
+  // load webfont-loader async, and add callback function
+  function async(u, cb, err) {
+    var d = document, t = 'script',
+      o = d.createElement(t),
+      s = d.getElementsByTagName(t)[0];
+    o.src = u;
+    if (cb) { o.addEventListener('load', function (e) { cb(null, e); }, false); }
+    if (err) { o.addEventListener('error', function (e) { err(null, e); }, false); }
+    s.parentNode.insertBefore(o, s);
+  }
+
+  var asyncLoadWithFallBack = function(arr, success, reject) {
+      var currReject = function(){
+        reject()
+        arr.shift()
+        if(arr.length)
+          async(arr[0], success, currReject)
+        }
+
+      async(arr[0], success, currReject)
+  }
+
+  asyncLoadWithFallBack([
+    "https://cdn.jsdelivr.net/npm/webfontloader@1.6.28/webfontloader.min.js", 
+    "https://cdn.bootcss.com/webfont/1.6.28/webfontloader.js",
+    "/lib/webfontloader.min.js"
+  ], asyncCb, asyncErr)
+</script>        
+        <img class="loading" src="/assets/loading.svg" style="display: block; margin: 6rem auto 0 auto; width: 6rem; height: 6rem;" />
+        <div class="container container-unloaded">
+            <main class="main post-page">
+    <article class="article-entry">
+        <h4 id="介绍一下js的数据类型有哪些-值是如何存储的"><a href="#介绍一下js的数据类型有哪些-值是如何存储的" class="headerlink" title="介绍一下js的数据类型有哪些,值是如何存储的"></a>介绍一下js的数据类型有哪些,值是如何存储的</h4><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">一共有8种数据类型，7种基本数据类型</span><br><span class="line">String </span><br><span class="line">Number </span><br><span class="line">Boolean </span><br><span class="line">Null </span><br><span class="line">Undefined </span><br><span class="line">Symbol（es6 新增类型，表示第一无二的值） </span><br><span class="line">BigInt（es10 新增数据类型，目的是比Number数据类型支持的范围更大的整数值）</span><br></pre></td></tr></table></figure>
+<h3 id="amp-amp-、-和-运算符分别能做什么"><a href="#amp-amp-、-和-运算符分别能做什么" class="headerlink" title="&amp;&amp; 、 ||和!! 运算符分别能做什么"></a>&amp;&amp; 、 ||和!! 运算符分别能做什么</h3><h4 id="JS的数据类型的转换"><a href="#JS的数据类型的转换" class="headerlink" title="JS的数据类型的转换"></a>JS的数据类型的转换</h4><h4 id="JS中数据类型的判断（-typeof，instanceof，constructor，Object-prototype-toString-call"><a href="#JS中数据类型的判断（-typeof，instanceof，constructor，Object-prototype-toString-call" class="headerlink" title="JS中数据类型的判断（ typeof，instanceof，constructor，Object.prototype.toString.call()"></a>JS中数据类型的判断（ typeof，instanceof，constructor，Object.prototype.toString.call()</h4><h4 id="介绍-JS-有哪些内置对象？"><a href="#介绍-JS-有哪些内置对象？" class="headerlink" title="介绍 JS 有哪些内置对象？"></a>介绍 JS 有哪些内置对象？</h4><h4 id="undefined-与-undeclared-的区别？"><a href="#undefined-与-undeclared-的区别？" class="headerlink" title="undefined 与 undeclared 的区别？"></a>undefined 与 undeclared 的区别？</h4><h4 id="null-和-undefined-的区别？"><a href="#null-和-undefined-的区别？" class="headerlink" title="null 和 undefined 的区别？"></a>null 和 undefined 的区别？</h4><h4 id="和-的valueOf和toString的结果是什么？"><a href="#和-的valueOf和toString的结果是什么？" class="headerlink" title="{}和[]的valueOf和toString的结果是什么？"></a>{}和[]的valueOf和toString的结果是什么？</h4><h4 id="Javascript-的作用域和作用域链？"><a href="#Javascript-的作用域和作用域链？" class="headerlink" title="Javascript 的作用域和作用域链？"></a>Javascript 的作用域和作用域链？</h4><h4 id="javascript-创建对象的几种方式？"><a href="#javascript-创建对象的几种方式？" class="headerlink" title="javascript 创建对象的几种方式？"></a>javascript 创建对象的几种方式？</h4><h4 id="JavaScript-继承的几种实现方式？"><a href="#JavaScript-继承的几种实现方式？" class="headerlink" title="JavaScript 继承的几种实现方式？"></a>JavaScript 继承的几种实现方式？</h4><h4 id="寄生式组合继承的实现？"><a href="#寄生式组合继承的实现？" class="headerlink" title="寄生式组合继承的实现？"></a>寄生式组合继承的实现？</h4><h4 id="谈谈你对this、call、apply和bind的理解"><a href="#谈谈你对this、call、apply和bind的理解" class="headerlink" title="谈谈你对this、call、apply和bind的理解"></a>谈谈你对this、call、apply和bind的理解</h4><h4 id="JavaScript-原型，原型链？-有什么特点？"><a href="#JavaScript-原型，原型链？-有什么特点？" class="headerlink" title="JavaScript 原型，原型链？ 有什么特点？"></a>JavaScript 原型，原型链？ 有什么特点？</h4><h4 id="js-获取原型的方法？"><a href="#js-获取原型的方法？" class="headerlink" title="js 获取原型的方法？"></a>js 获取原型的方法？</h4><h4 id="什么是闭包，为什么要用它？"><a href="#什么是闭包，为什么要用它？" class="headerlink" title="什么是闭包，为什么要用它？"></a>什么是闭包，为什么要用它？</h4><h4 id="什么是-DOM-和-BOM？"><a href="#什么是-DOM-和-BOM？" class="headerlink" title="什么是 DOM 和 BOM？"></a>什么是 DOM 和 BOM？</h4><h4 id="三种事件模型是什么？"><a href="#三种事件模型是什么？" class="headerlink" title="三种事件模型是什么？"></a>三种事件模型是什么？</h4><h4 id="事件委托是什么？"><a href="#事件委托是什么？" class="headerlink" title="事件委托是什么？"></a>事件委托是什么？</h4><h4 id="什么是事件传播"><a href="#什么是事件传播" class="headerlink" title="什么是事件传播?"></a>什么是事件传播?</h4><h4 id="什么是事件捕获？"><a href="#什么是事件捕获？" class="headerlink" title="什么是事件捕获？"></a>什么是事件捕获？</h4><h4 id="什么是事件冒泡？"><a href="#什么是事件冒泡？" class="headerlink" title="什么是事件冒泡？"></a>什么是事件冒泡？</h4><h4 id="DOM-操作——怎样添加、移除、移动、复制、创建和查找节点？"><a href="#DOM-操作——怎样添加、移除、移动、复制、创建和查找节点？" class="headerlink" title="DOM 操作——怎样添加、移除、移动、复制、创建和查找节点？"></a>DOM 操作——怎样添加、移除、移动、复制、创建和查找节点？</h4><h4 id="js数组和对象有哪些原生方法-列举一下"><a href="#js数组和对象有哪些原生方法-列举一下" class="headerlink" title="js数组和对象有哪些原生方法,列举一下"></a>js数组和对象有哪些原生方法,列举一下</h4><h4 id="常用的正则表达式"><a href="#常用的正则表达式" class="headerlink" title="常用的正则表达式"></a>常用的正则表达式</h4><h4 id="Ajax-是什么-如何创建一个-Ajax？"><a href="#Ajax-是什么-如何创建一个-Ajax？" class="headerlink" title="Ajax 是什么? 如何创建一个 Ajax？"></a>Ajax 是什么? 如何创建一个 Ajax？</h4><h4 id="js-延迟加载的方式有哪些？"><a href="#js-延迟加载的方式有哪些？" class="headerlink" title="js 延迟加载的方式有哪些？"></a>js 延迟加载的方式有哪些？</h4><h4 id="谈谈你对模块化开发的理解？"><a href="#谈谈你对模块化开发的理解？" class="headerlink" title="谈谈你对模块化开发的理解？"></a>谈谈你对模块化开发的理解？</h4><h4 id="js-的几种模块规范？"><a href="#js-的几种模块规范？" class="headerlink" title="js 的几种模块规范？"></a>js 的几种模块规范？</h4><h4 id="AMD和CMD-规范的区别？"><a href="#AMD和CMD-规范的区别？" class="headerlink" title="AMD和CMD 规范的区别？"></a>AMD和CMD 规范的区别？</h4><h4 id="ES6-模块与-CommonJS-模块、AMD、CMD-的差异。"><a href="#ES6-模块与-CommonJS-模块、AMD、CMD-的差异。" class="headerlink" title="ES6 模块与 CommonJS 模块、AMD、CMD 的差异。"></a>ES6 模块与 CommonJS 模块、AMD、CMD 的差异。</h4><h4 id="requireJS的核心原理是什么？-33-谈谈JS的运行机制"><a href="#requireJS的核心原理是什么？-33-谈谈JS的运行机制" class="headerlink" title="requireJS的核心原理是什么？ 33. 谈谈JS的运行机制"></a>requireJS的核心原理是什么？ 33. 谈谈JS的运行机制</h4><h4 id="arguments-的对象是什么？"><a href="#arguments-的对象是什么？" class="headerlink" title="arguments 的对象是什么？"></a>arguments 的对象是什么？</h4><h4 id="为什么在调用这个函数时，代码中的b会变成一个全局变量"><a href="#为什么在调用这个函数时，代码中的b会变成一个全局变量" class="headerlink" title="为什么在调用这个函数时，代码中的b会变成一个全局变量?"></a>为什么在调用这个函数时，代码中的b会变成一个全局变量?</h4><h4 id="简单介绍一下V8引擎的垃圾回收机制"><a href="#简单介绍一下V8引擎的垃圾回收机制" class="headerlink" title="简单介绍一下V8引擎的垃圾回收机制"></a>简单介绍一下V8引擎的垃圾回收机制</h4><h4 id="哪些操作会造成内存泄漏？-38-ECMAScript-是什么？"><a href="#哪些操作会造成内存泄漏？-38-ECMAScript-是什么？" class="headerlink" title="哪些操作会造成内存泄漏？ 38. ECMAScript 是什么？"></a>哪些操作会造成内存泄漏？ 38. ECMAScript 是什么？</h4><h4 id="ECMAScript-2015（ES6）有哪些新特性？"><a href="#ECMAScript-2015（ES6）有哪些新特性？" class="headerlink" title="ECMAScript 2015（ES6）有哪些新特性？"></a>ECMAScript 2015（ES6）有哪些新特性？</h4><h4 id="var-let和const的区别是什么？"><a href="#var-let和const的区别是什么？" class="headerlink" title="var,let和const的区别是什么？"></a>var,let和const的区别是什么？</h4><h4 id="什么是箭头函数？"><a href="#什么是箭头函数？" class="headerlink" title="什么是箭头函数？"></a>什么是箭头函数？</h4><h4 id="什么是类？"><a href="#什么是类？" class="headerlink" title="什么是类？"></a>什么是类？</h4><h4 id="什么是模板字符串？"><a href="#什么是模板字符串？" class="headerlink" title="什么是模板字符串？"></a>什么是模板字符串？</h4><h4 id="什么是对象解构？"><a href="#什么是对象解构？" class="headerlink" title="什么是对象解构？"></a>什么是对象解构？</h4><h4 id="什么是Set对象，它是如何工作的？"><a href="#什么是Set对象，它是如何工作的？" class="headerlink" title="什么是Set对象，它是如何工作的？"></a>什么是Set对象，它是如何工作的？</h4><h4 id="什么是Proxy？"><a href="#什么是Proxy？" class="headerlink" title="什么是Proxy？"></a>什么是Proxy？</h4><h4 id="写一个通用的事件侦听器函数，为什么要用它？"><a href="#写一个通用的事件侦听器函数，为什么要用它？" class="headerlink" title="写一个通用的事件侦听器函数，为什么要用它？"></a>写一个通用的事件侦听器函数，为什么要用它？</h4><h4 id="什么是函数式编程-JavaScript的哪些特性使其成为函数式语言的候选语言？"><a href="#什么是函数式编程-JavaScript的哪些特性使其成为函数式语言的候选语言？" class="headerlink" title="什么是函数式编程? JavaScript的哪些特性使其成为函数式语言的候选语言？"></a>什么是函数式编程? JavaScript的哪些特性使其成为函数式语言的候选语言？</h4><h4 id="什么是高阶函数？"><a href="#什么是高阶函数？" class="headerlink" title="什么是高阶函数？"></a>什么是高阶函数？</h4><h4 id="为什么函数被称为一等公民？"><a href="#为什么函数被称为一等公民？" class="headerlink" title="为什么函数被称为一等公民？"></a>为什么函数被称为一等公民？</h4><h4 id="手动实现Array-prototype-map-方法"><a href="#手动实现Array-prototype-map-方法" class="headerlink" title="手动实现Array.prototype.map 方法"></a>手动实现Array.prototype.map 方法</h4><h4 id="手动实现Array-prototype-filter方法"><a href="#手动实现Array-prototype-filter方法" class="headerlink" title="手动实现Array.prototype.filter方法"></a>手动实现Array.prototype.filter方法</h4><h4 id="手动实现Array-prototype-reduce方法"><a href="#手动实现Array-prototype-reduce方法" class="headerlink" title="手动实现Array.prototype.reduce方法"></a>手动实现Array.prototype.reduce方法</h4><h4 id="js的深浅拷贝"><a href="#js的深浅拷贝" class="headerlink" title="js的深浅拷贝"></a>js的深浅拷贝</h4><h4 id="手写call、apply及bind函数"><a href="#手写call、apply及bind函数" class="headerlink" title="手写call、apply及bind函数"></a>手写call、apply及bind函数</h4><h4 id="函数柯里化的实现"><a href="#函数柯里化的实现" class="headerlink" title="函数柯里化的实现"></a>函数柯里化的实现</h4><h4 id="js模拟new操作符的实现"><a href="#js模拟new操作符的实现" class="headerlink" title="js模拟new操作符的实现"></a>js模拟new操作符的实现</h4><h4 id="什么是回调函数？回调函数有什么缺点"><a href="#什么是回调函数？回调函数有什么缺点" class="headerlink" title="什么是回调函数？回调函数有什么缺点"></a>什么是回调函数？回调函数有什么缺点</h4><h4 id="Promise是什么，可以手写实现一下吗？"><a href="#Promise是什么，可以手写实现一下吗？" class="headerlink" title="Promise是什么，可以手写实现一下吗？"></a>Promise是什么，可以手写实现一下吗？</h4><h4 id="Iterator是什么，有什么作用？"><a href="#Iterator是什么，有什么作用？" class="headerlink" title="Iterator是什么，有什么作用？"></a>Iterator是什么，有什么作用？</h4><h4 id="Generator函数是什么，有什么作用？"><a href="#Generator函数是什么，有什么作用？" class="headerlink" title="Generator函数是什么，有什么作用？"></a>Generator函数是什么，有什么作用？</h4><h4 id="什么是-async-await及其如何工作-有什么优缺点？"><a href="#什么是-async-await及其如何工作-有什么优缺点？" class="headerlink" title="什么是 async/await及其如何工作,有什么优缺点？"></a>什么是 async/await及其如何工作,有什么优缺点？</h4><h4 id="instanceof的原理是什么，如何实现"><a href="#instanceof的原理是什么，如何实现" class="headerlink" title="instanceof的原理是什么，如何实现"></a>instanceof的原理是什么，如何实现</h4><h4 id="js的节流与防抖"><a href="#js的节流与防抖" class="headerlink" title="js的节流与防抖"></a>js的节流与防抖</h4><h4 id="什么是设计模式？"><a href="#什么是设计模式？" class="headerlink" title="什么是设计模式？"></a>什么是设计模式？</h4><h4 id="9种前端常见的设计模式"><a href="#9种前端常见的设计模式" class="headerlink" title="9种前端常见的设计模式"></a>9种前端常见的设计模式</h4>
+    </article>
+    <!-- license  -->
+    
+    <!-- paginator  -->
+    <ul class="post-paginator">
+        <li class="next">
+            
+        </li>
+        <li class="previous">
+            
+                <div class="prevSlogan">Previous Post</div>
+                <a href= "/2020/07/13/BFC理解原理/" title= "BFC理解原理">
+                    <div class="prevTitle">BFC理解原理</div>
+                </a>
+            
+        </li>
+    </ul>
+    <!-- 评论插件 -->
+    <!-- 来必力City版安装代码 -->
+
+<!-- City版安装代码已完成 -->
+    
+    
+    <!-- partial('_partial/comment/changyan') -->
+    <!--PC版-->
+
+
+    
+    
+
+    <!-- 评论 -->
+</main>
+            <!-- profile -->
+            
+        </div>
+        <footer class="footer footer-unloaded">
+    <!-- social  -->
+    
+    <div class="social">
+        
+    
+        
+            
+                <a href="mailto:1309609944@qq.com" class="iconfont-archer email" title=email ></a>
+            
+        
+    
+        
+            
+                <a href="//github.com/highzq" class="iconfont-archer github" target="_blank" title=github></a>
+            
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+
+    </div>
+    
+    <!-- powered by Hexo  -->
+    <div class="copyright">
+        <span id="hexo-power">Powered by <a href="https://hexo.io/" target="_blank">Hexo</a></span><span class="iconfont-archer power">&#xe635;</span><span id="theme-info">theme <a href="https://github.com/fi3ework/hexo-theme-archer" target="_blank">Archer</a></span>
+    </div>
+    <!-- 不蒜子  -->
+    
+    <div class="busuanzi-container">
+    
+     
+    <span id="busuanzi_container_site_pv">PV: <span id="busuanzi_value_site_pv"></span> :)</span>
+    
+    </div>
+    
+</footer>
+    </div>
+    <!-- toc -->
+    
+    <div class="toc-wrapper" style=
+    
+
+
+
+
+
+
+
+top:50vh;
+
+    >
+        <div class="toc-catalog">
+            <span class="iconfont-archer catalog-icon">&#xe613;</span><span>CATALOG</span>
+        </div>
+        <ol class="toc"><li class="toc-item toc-level-4"><a class="toc-link" href="#介绍一下js的数据类型有哪些-值是如何存储的"><span class="toc-number">1.</span> <span class="toc-text">介绍一下js的数据类型有哪些,值是如何存储的</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#amp-amp-、-和-运算符分别能做什么"><span class="toc-number"></span> <span class="toc-text">&amp;&amp; 、 ||和!! 运算符分别能做什么</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#JS的数据类型的转换"><span class="toc-number">1.</span> <span class="toc-text">JS的数据类型的转换</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#JS中数据类型的判断（-typeof，instanceof，constructor，Object-prototype-toString-call"><span class="toc-number">2.</span> <span class="toc-text">JS中数据类型的判断（ typeof，instanceof，constructor，Object.prototype.toString.call()</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#介绍-JS-有哪些内置对象？"><span class="toc-number">3.</span> <span class="toc-text">介绍 JS 有哪些内置对象？</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#undefined-与-undeclared-的区别？"><span class="toc-number">4.</span> <span class="toc-text">undefined 与 undeclared 的区别？</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#null-和-undefined-的区别？"><span class="toc-number">5.</span> <span class="toc-text">null 和 undefined 的区别？</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#和-的valueOf和toString的结果是什么？"><span class="toc-number">6.</span> <span class="toc-text">{}和[]的valueOf和toString的结果是什么？</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Javascript-的作用域和作用域链？"><span class="toc-number">7.</span> <span class="toc-text">Javascript 的作用域和作用域链？</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#javascript-创建对象的几种方式？"><span class="toc-number">8.</span> <span class="toc-text">javascript 创建对象的几种方式？</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#JavaScript-继承的几种实现方式？"><span class="toc-number">9.</span> <span class="toc-text">JavaScript 继承的几种实现方式？</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#寄生式组合继承的实现？"><span class="toc-number">10.</span> <span class="toc-text">寄生式组合继承的实现？</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#谈谈你对this、call、apply和bind的理解"><span class="toc-number">11.</span> <span class="toc-text">谈谈你对this、call、apply和bind的理解</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#JavaScript-原型，原型链？-有什么特点？"><span class="toc-number">12.</span> <span class="toc-text">JavaScript 原型，原型链？ 有什么特点？</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#js-获取原型的方法？"><span class="toc-number">13.</span> <span class="toc-text">js 获取原型的方法？</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#什么是闭包，为什么要用它？"><span class="toc-number">14.</span> <span class="toc-text">什么是闭包，为什么要用它？</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#什么是-DOM-和-BOM？"><span class="toc-number">15.</span> <span class="toc-text">什么是 DOM 和 BOM？</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#三种事件模型是什么？"><span class="toc-number">16.</span> <span class="toc-text">三种事件模型是什么？</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#事件委托是什么？"><span class="toc-number">17.</span> <span class="toc-text">事件委托是什么？</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#什么是事件传播"><span class="toc-number">18.</span> <span class="toc-text">什么是事件传播?</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#什么是事件捕获？"><span class="toc-number">19.</span> <span class="toc-text">什么是事件捕获？</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#什么是事件冒泡？"><span class="toc-number">20.</span> <span class="toc-text">什么是事件冒泡？</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#DOM-操作——怎样添加、移除、移动、复制、创建和查找节点？"><span class="toc-number">21.</span> <span class="toc-text">DOM 操作——怎样添加、移除、移动、复制、创建和查找节点？</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#js数组和对象有哪些原生方法-列举一下"><span class="toc-number">22.</span> <span class="toc-text">js数组和对象有哪些原生方法,列举一下</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#常用的正则表达式"><span class="toc-number">23.</span> <span class="toc-text">常用的正则表达式</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Ajax-是什么-如何创建一个-Ajax？"><span class="toc-number">24.</span> <span class="toc-text">Ajax 是什么? 如何创建一个 Ajax？</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#js-延迟加载的方式有哪些？"><span class="toc-number">25.</span> <span class="toc-text">js 延迟加载的方式有哪些？</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#谈谈你对模块化开发的理解？"><span class="toc-number">26.</span> <span class="toc-text">谈谈你对模块化开发的理解？</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#js-的几种模块规范？"><span class="toc-number">27.</span> <span class="toc-text">js 的几种模块规范？</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#AMD和CMD-规范的区别？"><span class="toc-number">28.</span> <span class="toc-text">AMD和CMD 规范的区别？</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#ES6-模块与-CommonJS-模块、AMD、CMD-的差异。"><span class="toc-number">29.</span> <span class="toc-text">ES6 模块与 CommonJS 模块、AMD、CMD 的差异。</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#requireJS的核心原理是什么？-33-谈谈JS的运行机制"><span class="toc-number">30.</span> <span class="toc-text">requireJS的核心原理是什么？ 33. 谈谈JS的运行机制</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#arguments-的对象是什么？"><span class="toc-number">31.</span> <span class="toc-text">arguments 的对象是什么？</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#为什么在调用这个函数时，代码中的b会变成一个全局变量"><span class="toc-number">32.</span> <span class="toc-text">为什么在调用这个函数时，代码中的b会变成一个全局变量?</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#简单介绍一下V8引擎的垃圾回收机制"><span class="toc-number">33.</span> <span class="toc-text">简单介绍一下V8引擎的垃圾回收机制</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#哪些操作会造成内存泄漏？-38-ECMAScript-是什么？"><span class="toc-number">34.</span> <span class="toc-text">哪些操作会造成内存泄漏？ 38. ECMAScript 是什么？</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#ECMAScript-2015（ES6）有哪些新特性？"><span class="toc-number">35.</span> <span class="toc-text">ECMAScript 2015（ES6）有哪些新特性？</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#var-let和const的区别是什么？"><span class="toc-number">36.</span> <span class="toc-text">var,let和const的区别是什么？</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#什么是箭头函数？"><span class="toc-number">37.</span> <span class="toc-text">什么是箭头函数？</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#什么是类？"><span class="toc-number">38.</span> <span class="toc-text">什么是类？</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#什么是模板字符串？"><span class="toc-number">39.</span> <span class="toc-text">什么是模板字符串？</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#什么是对象解构？"><span class="toc-number">40.</span> <span class="toc-text">什么是对象解构？</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#什么是Set对象，它是如何工作的？"><span class="toc-number">41.</span> <span class="toc-text">什么是Set对象，它是如何工作的？</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#什么是Proxy？"><span class="toc-number">42.</span> <span class="toc-text">什么是Proxy？</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#写一个通用的事件侦听器函数，为什么要用它？"><span class="toc-number">43.</span> <span class="toc-text">写一个通用的事件侦听器函数，为什么要用它？</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#什么是函数式编程-JavaScript的哪些特性使其成为函数式语言的候选语言？"><span class="toc-number">44.</span> <span class="toc-text">什么是函数式编程? JavaScript的哪些特性使其成为函数式语言的候选语言？</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#什么是高阶函数？"><span class="toc-number">45.</span> <span class="toc-text">什么是高阶函数？</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#为什么函数被称为一等公民？"><span class="toc-number">46.</span> <span class="toc-text">为什么函数被称为一等公民？</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#手动实现Array-prototype-map-方法"><span class="toc-number">47.</span> <span class="toc-text">手动实现Array.prototype.map 方法</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#手动实现Array-prototype-filter方法"><span class="toc-number">48.</span> <span class="toc-text">手动实现Array.prototype.filter方法</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#手动实现Array-prototype-reduce方法"><span class="toc-number">49.</span> <span class="toc-text">手动实现Array.prototype.reduce方法</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#js的深浅拷贝"><span class="toc-number">50.</span> <span class="toc-text">js的深浅拷贝</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#手写call、apply及bind函数"><span class="toc-number">51.</span> <span class="toc-text">手写call、apply及bind函数</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#函数柯里化的实现"><span class="toc-number">52.</span> <span class="toc-text">函数柯里化的实现</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#js模拟new操作符的实现"><span class="toc-number">53.</span> <span class="toc-text">js模拟new操作符的实现</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#什么是回调函数？回调函数有什么缺点"><span class="toc-number">54.</span> <span class="toc-text">什么是回调函数？回调函数有什么缺点</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Promise是什么，可以手写实现一下吗？"><span class="toc-number">55.</span> <span class="toc-text">Promise是什么，可以手写实现一下吗？</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Iterator是什么，有什么作用？"><span class="toc-number">56.</span> <span class="toc-text">Iterator是什么，有什么作用？</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Generator函数是什么，有什么作用？"><span class="toc-number">57.</span> <span class="toc-text">Generator函数是什么，有什么作用？</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#什么是-async-await及其如何工作-有什么优缺点？"><span class="toc-number">58.</span> <span class="toc-text">什么是 async/await及其如何工作,有什么优缺点？</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#instanceof的原理是什么，如何实现"><span class="toc-number">59.</span> <span class="toc-text">instanceof的原理是什么，如何实现</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#js的节流与防抖"><span class="toc-number">60.</span> <span class="toc-text">js的节流与防抖</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#什么是设计模式？"><span class="toc-number">61.</span> <span class="toc-text">什么是设计模式？</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#9种前端常见的设计模式"><span class="toc-number">62.</span> <span class="toc-text">9种前端常见的设计模式</span></a></li></ol>
+    </div>
+    
+    <div class="back-top iconfont-archer">&#xe639;</div>
+    <div class="sidebar sidebar-hide">
+    <ul class="sidebar-tabs sidebar-tabs-active-0">
+        <li class="sidebar-tab-archives"><span class="iconfont-archer">&#xe67d;</span><span class="tab-name">Archive</span></li>
+        <li class="sidebar-tab-tags"><span class="iconfont-archer">&#xe61b;</span><span class="tab-name">Tag</span></li>
+        <li class="sidebar-tab-categories"><span class="iconfont-archer">&#xe666;</span><span class="tab-name">Cate</span></li>
+    </ul>
+    <div class="sidebar-content sidebar-content-show-archive">
+          <div class="sidebar-panel-archives">
+    <!-- 在ejs中将archive按照时间排序 -->
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    <div class="total-and-search">
+        <div class="total-archive">
+        Total : 6
+        </div>
+        <!-- search  -->
+        
+    </div>
+    
+    <div class="post-archive">
+    
+    
+    
+    
+    <div class="archive-year"> 2020 </div>
+    <ul class="year-list">
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">07/13</span><a class="archive-post-title" href= "/2020/07/13/问题整理/" >问题整理</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">07/13</span><a class="archive-post-title" href= "/2020/07/13/BFC理解原理/" >BFC理解原理</a>
+        </li>
+    
+    
+    
+    
+    
+        </ul>
+    
+    <div class="archive-year"> 2019 </div>
+    <ul class="year-list">
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">03/29</span><a class="archive-post-title" href= "/2019/03/29/react-Context-上下文方法使用/" >react Context(上下文方法使用)</a>
+        </li>
+    
+    
+    
+    
+    
+        </ul>
+    
+    <div class="archive-year"> 2018 </div>
+    <ul class="year-list">
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">07/25</span><a class="archive-post-title" href= "/2018/07/25/让h5页面强制横屏/" >让h5页面强制横屏</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">07/25</span><a class="archive-post-title" href= "/2018/07/25/forEach兼容写法/" >forEach兼容写法</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">07/13</span><a class="archive-post-title" href= "/2018/07/13/使用hexo搭建博客时遇到的问题/" >使用hexo搭建博客时遇到的问题</a>
+        </li>
+    
+    </div>
+  </div>
+        <div class="sidebar-panel-tags">
+    <div class="sidebar-tags-name">
+    
+        <span class="sidebar-tag-name" data-tags="HTML"><span class="iconfont-archer">&#xe606;</span>HTML</span>
+    
+        <span class="sidebar-tag-name" data-tags="javaScript"><span class="iconfont-archer">&#xe606;</span>javaScript</span>
+    
+        <span class="sidebar-tag-name" data-tags="react"><span class="iconfont-archer">&#xe606;</span>react</span>
+    
+        <span class="sidebar-tag-name" data-tags="文章"><span class="iconfont-archer">&#xe606;</span>文章</span>
+    
+        <span class="sidebar-tag-name" data-tags="技巧"><span class="iconfont-archer">&#xe606;</span>技巧</span>
+    
+        <span class="sidebar-tag-name" data-tags="心得"><span class="iconfont-archer">&#xe606;</span>心得</span>
+    
+    </div>
+    <div class="iconfont-archer sidebar-tags-empty">&#xe678;</div>
+    <div class="tag-load-fail" style="display: none; color: #ccc; font-size: 0.6rem;">
+    缺失模块。<br/>
+    1、请确保node版本大于6.2<br/>
+    2、在博客根目录（注意不是archer根目录）执行以下命令：<br/>
+    <span style="color: #f75357; font-size: 1rem; line-height: 2rem;">npm i hexo-generator-json-content --save</span><br/>
+    3、在根目录_config.yml里添加配置：
+    <pre style="color: #787878; font-size: 0.6rem;">
+jsonContent:
+  meta: false
+  pages: false
+  posts:
+    title: true
+    date: true
+    path: true
+    text: false
+    raw: false
+    content: false
+    slug: false
+    updated: false
+    comments: false
+    link: false
+    permalink: false
+    excerpt: false
+    categories: true
+    tags: true</pre>
+    </div> 
+    <div class="sidebar-tags-list"></div>
+</div>
+        <div class="sidebar-panel-categories">
+    <div class="sidebar-categories-name">
+    
+        <span class="sidebar-category-name" data-categories="技术"><span class="iconfont-archer">&#xe60a;</span>技术</span>
+    
+        <span class="sidebar-category-name" data-categories="记录"><span class="iconfont-archer">&#xe60a;</span>记录</span>
+    
+    </div>
+    <div class="iconfont-archer sidebar-categories-empty">&#xe678;</div>
+    <div class="sidebar-categories-list"></div>
+</div>
+    </div>
+</div> 
+    <script>
+    var siteMeta = {
+        root: "/",
+        author: "Gao"
+    }
+</script>
+    <!-- CDN failover -->
+    <script src="https://cdn.jsdelivr.net/npm/jquery@3.3.1/dist/jquery.min.js"></script>
+    <script type="text/javascript">
+        if (typeof window.$ === 'undefined')
+        {
+            console.warn('jquery load from jsdelivr failed, will load local script')
+            document.write('<script src="/lib/jquery.min.js">\x3C/script>')
+        }
+    </script>
+    <script src="/scripts/main.js"></script>
+    <!-- algolia -->
+    
+    <!-- busuanzi  -->
+    
+    <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+    
+    <!-- CNZZ  -->
+    
+    </div>
+    <!-- async load share.js -->
+    
+        <script src="/scripts/share.js" async></script>    
+     
+    </body>
+</html>
+
+
