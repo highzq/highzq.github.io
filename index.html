@@ -364,8 +364,7 @@ height:50vh;
                 <span>问题整理</span>
         </a>
         <div class="abstract-content">
-            介绍一下js的数据类型有哪些,值是如何存储的一共有8种数据类型，7种基本数据类型String Number Boolean Null Undefined Symbol（es6 新增类型，表示第一无二的值） BigInt（es10 新增数据类型，目的是比Number数据类型支持的范围更大的整数值）
-&amp;&amp; 、 ||和!! 运算符分别能做什么JS的数据类型的转换JS中数据类型的判断（ typeof，instanceof，constructor，Object.prototype.toString.call()介绍 JS 有哪些内置对象？undefined 与 undeclared...
+            介绍一下js的数据类型有哪些,值是如何存储的一共有8种数据类型，7种基本数据类型String Number Boolean Null Undefined Symbol（es6 新增类型，表示第一无二的值） BigInt（es10 新增数据类型，目的是比Number数据类型支持的范围更大的整数值）Object（1种引用数据类型，里面包含 function、Array、Date等，JavaScript不支持任何创建自定义类型的机制，而所有值最终都将是上述 8 种数据类型之一）原始数据类型：直接存储在栈（stack）中，占据空间小、大小固定，属于被频繁使用数据，所以放入栈中存储。引用数据类型：...
         </div>
         <div class="abstract-post-meta">
             <!-- date  -->
@@ -460,37 +459,6 @@ height:50vh;
     
     
     <article class="index-post">
-        <a class="abstract-title" href = "/2018/07/25/forEach兼容写法/" >
-            
-                <span>forEach兼容写法</span>
-        </a>
-        <div class="abstract-content">
-            最近写代码写到循环的时候没有多想就直接用了forEach，最后测试在IE的环境下测出了不兼容，为了不改动代码就打算定义一个 Array.prototype.forEach。
-最后在网上找到这段(兼容IE8)
-if ( !Array.prototype.forEach ) &#123;    Array.prototype.forEach = function forEach( callback, thisArg ) &#123;        var T, k;        if ( this == null ) &#123;            throw new TypeErro...
-        </div>
-        <div class="abstract-post-meta">
-            <!-- date  -->
-            <div class="abstract-date">
-                <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2018/07/25</span>
-            </div>
-            <!-- tags  -->
-            
-            <div class= abstract-tags >
-    
-        <a class="post-tag" href="javascript:void(0);" data-tags = "javaScript">javaScript</a>
-    
-</div>
-            
-        </div>
-    </article>
-    
-    
-    
-    
-    
-    
-    <article class="index-post">
         <a class="abstract-title" href = "/2018/07/25/让h5页面强制横屏/" >
             
                 <span>让h5页面强制横屏</span>
@@ -525,6 +493,37 @@ if ( !Array.prototype.forEach ) &#123;    Array.prototype.forEach = function for
     
     
     <article class="index-post">
+        <a class="abstract-title" href = "/2018/07/25/forEach兼容写法/" >
+            
+                <span>forEach兼容写法</span>
+        </a>
+        <div class="abstract-content">
+            最近写代码写到循环的时候没有多想就直接用了forEach，最后测试在IE的环境下测出了不兼容，为了不改动代码就打算定义一个 Array.prototype.forEach。
+最后在网上找到这段(兼容IE8)
+if ( !Array.prototype.forEach ) &#123;    Array.prototype.forEach = function forEach( callback, thisArg ) &#123;        var T, k;        if ( this == null ) &#123;            throw new TypeErro...
+        </div>
+        <div class="abstract-post-meta">
+            <!-- date  -->
+            <div class="abstract-date">
+                <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2018/07/25</span>
+            </div>
+            <!-- tags  -->
+            
+            <div class= abstract-tags >
+    
+        <a class="post-tag" href="javascript:void(0);" data-tags = "javaScript">javaScript</a>
+    
+</div>
+            
+        </div>
+    </article>
+    
+    
+    
+    
+    
+    
+    <article class="index-post">
         <a class="abstract-title" href = "/2018/07/13/使用hexo搭建博客时遇到的问题/" >
             
                 <span>使用hexo搭建博客时遇到的问题</span>
@@ -542,9 +541,9 @@ if ( !Array.prototype.forEach ) &#123;    Array.prototype.forEach = function for
             
             <div class= abstract-tags >
     
-        <a class="post-tag" href="javascript:void(0);" data-tags = "文章">文章</a>
-    
         <a class="post-tag" href="javascript:void(0);" data-tags = "心得">心得</a>
+    
+        <a class="post-tag" href="javascript:void(0);" data-tags = "文章">文章</a>
     
 </div>
             
@@ -785,6 +784,10 @@ if ( !Array.prototype.forEach ) &#123;    Array.prototype.forEach = function for
     
     
     
+    
+    
+    
+    
     <div class="total-and-search">
         <div class="total-archive">
         Total : 6
@@ -836,12 +839,12 @@ if ( !Array.prototype.forEach ) &#123;    Array.prototype.forEach = function for
     
     
         <li class="archive-post-item">
-            <span class="archive-post-date">07/25</span><a class="archive-post-title" href= "/2018/07/25/让h5页面强制横屏/" >让h5页面强制横屏</a>
+            <span class="archive-post-date">07/25</span><a class="archive-post-title" href= "/2018/07/25/forEach兼容写法/" >forEach兼容写法</a>
         </li>
     
     
         <li class="archive-post-item">
-            <span class="archive-post-date">07/25</span><a class="archive-post-title" href= "/2018/07/25/forEach兼容写法/" >forEach兼容写法</a>
+            <span class="archive-post-date">07/25</span><a class="archive-post-title" href= "/2018/07/25/让h5页面强制横屏/" >让h5页面强制横屏</a>
         </li>
     
     
@@ -856,15 +859,15 @@ if ( !Array.prototype.forEach ) &#123;    Array.prototype.forEach = function for
     
         <span class="sidebar-tag-name" data-tags="HTML"><span class="iconfont-archer">&#xe606;</span>HTML</span>
     
-        <span class="sidebar-tag-name" data-tags="javaScript"><span class="iconfont-archer">&#xe606;</span>javaScript</span>
-    
-        <span class="sidebar-tag-name" data-tags="react"><span class="iconfont-archer">&#xe606;</span>react</span>
+        <span class="sidebar-tag-name" data-tags="心得"><span class="iconfont-archer">&#xe606;</span>心得</span>
     
         <span class="sidebar-tag-name" data-tags="文章"><span class="iconfont-archer">&#xe606;</span>文章</span>
     
+        <span class="sidebar-tag-name" data-tags="javaScript"><span class="iconfont-archer">&#xe606;</span>javaScript</span>
+    
         <span class="sidebar-tag-name" data-tags="技巧"><span class="iconfont-archer">&#xe606;</span>技巧</span>
     
-        <span class="sidebar-tag-name" data-tags="心得"><span class="iconfont-archer">&#xe606;</span>心得</span>
+        <span class="sidebar-tag-name" data-tags="react"><span class="iconfont-archer">&#xe606;</span>react</span>
     
     </div>
     <div class="iconfont-archer sidebar-tags-empty">&#xe678;</div>
